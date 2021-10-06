@@ -1,3 +1,3 @@
-LegistlativePowers :- Congress.
-Congress :- Senate.
-Congress :- HouseOfRepresentatives.
+legistlativePowers :- congress.
+congress :- senate.
+congress :- houseOfRepresentatives.
