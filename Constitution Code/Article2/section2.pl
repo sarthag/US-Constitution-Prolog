@@ -9,7 +9,8 @@ power(president, appoint(nominate(judge(supremeCourt)))) :- adviceAndConsent(sen
 
 /*Appoint Officers*/
 
-power(president, grantCommissions) :- recess(senate).
+power(president, fill(vacancies)) :- recess(senate).
+power(president, grant(commissions)) :- recess(senate).
 /*Commisions shall expire*/
 
 
