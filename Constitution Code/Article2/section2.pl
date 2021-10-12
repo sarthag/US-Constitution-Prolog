@@ -1,5 +1,5 @@
-power(president, grant(reprieve(offenseAgainstUS))) :- \+ (impeachment).
-power(president, grant(pardon(offenseAgainstUS))) :- \+ (impeachment).
+power(president, grant(reprieve(offenseAgainstUS))) :- not(impeachment).
+power(president, grant(pardon(offenseAgainstUS))) :- not(impeachment).
 
 power(president, makeTreaties) :- adviceAndConsent(senate).
 power(president, appoint(nominate(ambassador))) :- adviceAndConsent(senate).
@@ -16,7 +16,7 @@ power(president, grant(commissions)) :- recess(senate).
 
 
 commanderInChiefOfArmy(president).
-commanderInChiefOfNavyy(president).
+commanderInChiefOfNavy(president).
 commanderInChiefOfMilitia(president) :- inService(militia).
 
 

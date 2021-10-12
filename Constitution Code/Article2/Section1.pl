@@ -2,6 +2,7 @@ age(Name, Age).
 citizen(Name, Years).
 
 executivePower(president).
+/* Term of Power */
 
  
 /*
