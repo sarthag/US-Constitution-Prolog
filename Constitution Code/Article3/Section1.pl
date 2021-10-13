@@ -1,6 +1,4 @@
-judicialPowers :- court.
-court :- congressOrdained(Court).
+judicialPowers :- congressOrdained(Court).
 congressOrdained(supremeCourt).
-judge(Court).
-holdOffice(judge) :- behaviour(judge,good), tenure(judge).
-compensation(judge) :- holdOffice(judge).
+holdOffice(Judge) :- behaviour(Judge,good), tenure(Judge).
+compensation(Judge) :- holdOffice(Judge).
