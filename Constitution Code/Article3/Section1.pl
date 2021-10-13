@@ -1,5 +1,6 @@
 judicialPowers :- court.
 court :- congressOrdained(Court).
 congressOrdained(supremeCourt).
-holdOffice(judge(court)) :- behaviour((judge(court)),good), tenure(judge(court)).
-compensation(judge(court)) :- holdOffice(judge(court)).
+judge(Court).
+holdOffice(judge) :- behaviour(judge,good), tenure(judge).
+compensation(judge) :- holdOffice(judge).
