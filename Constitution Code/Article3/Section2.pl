@@ -19,5 +19,5 @@ controversy(citizen(State1),citizen(State2));
 controversy(citizen1(State1),citizen2(State1), 
 claimLandUnderGrant(citizen1(State1),State2),
 claimLandUnderGrant(citizen1(State1),State3);
-controversy(foreignState, citizen(State));
+controversy(foreignState, citizen(State1));
 controversy(foerignState, state(State1).
