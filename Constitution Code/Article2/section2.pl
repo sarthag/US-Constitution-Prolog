@@ -22,4 +22,4 @@ commanderInChiefOfMilitia(president) :- inService(militia).
 
 power(principalOfficer(Department), advice(president)).
 %Ammendment 25%
-vicePresident=presdient :- death(president); resignation(president);removalFromOffice(president). 
+vicePresident=president :- death(president); resignation(president);removalFromOffice(president). 
