@@ -8,24 +8,24 @@ power(congress, spend(welfare)).
 
 power(congress, borrow(moneyOnCreditOf(theUs))).
 
-power(congress, regulate(commerce(with(foreign(nationals)))).
-power(congress, regulate(commerce(among(states))).
-power(congress, regulate(commerce(with(indianTribes))).
+power(congress, regulate(commerce(with(foreign(nationals))))).
+power(congress, regulate(commerce(among(states)))).
+power(congress, regulate(commerce(with(indianTribes)))).
 
-power(congress, establish(uniform(rules(naturalization))).
+power(congress, establish(uniform(rules(naturalization)))).
 power(congress, establish(uniform(laws(bankrupcy)))).
 
 power(congress, coin(currency)).
-power(congress, regulate(value(currency)).
+power(congress, regulate(value(currency))).
 power(congress, regulate(exchangeRates(foreign(currency)))).
 
-power(congress, punish(counterfeiting(securities)).
-power(congress, punish(counterfeiting(currency)).
+power(congress, punish(counterfeiting(securities))).
+power(congress, punish(counterfeiting(currency))).
 
 power(congress, establish(postOffices)).
 power(congress, post(roads)).
-power(congress, provide(limitedTime(exlusive(right(writings, authours))).
-power(congress, provide(limitedTime(exlusive(right(discoveries, inventors))).
+power(congress, provide(limitedTime(exlusive(right(writings, authours))))).
+power(congress, provide(limitedTime(exlusive(right(discoveries, inventors))))).
 
 power(congress, provide(tribunals(congress))) :- inferior(tribunals(congress), tribunals(supremeCourt)).
 
@@ -33,8 +33,8 @@ power(congress, define(piracies(highSeas))).
 power(congress, punish(piracies(highSeas))).
 power(congress, define(felonies(highSeas))).
 power(congress, punish(felonies(highSeas))).
-power(congress, define(offences(lawOfNations)).
-power(congress, punish(offences(lawOfNations)).
+power(congress, define(offences(lawOfNations))).
+power(congress, punish(offences(lawOfNations))).
 
 power(congress, declare(war)).
 power(congress, grant(letters(marque))).
@@ -65,8 +65,8 @@ power(congress, provide(arming(militia))).
 power(congress, provide(disciplining(militia))).
 power(congress, governing(militia)) :- inService(militia).
 power(congress, appoint(ofiicers(militia))).
-power(congress, prescribe(discipline(training(militia))))).
+power(congress, prescribe(discipline(training(militia)))).
 
 power(congress, exercise(exlusive(legislation(becomes(seat(government(theUS), district))))))
 power(congress, exercise(authority(purchased(places)))) :- consent(legislation(state)).
-power(congress, make(laws(necessaryAndProper(power(constitution)))))).
+power(congress, make(laws(necessaryAndProper(power(constitution))))).
