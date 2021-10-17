@@ -13,8 +13,6 @@ power(president, fill(vacancies)) :- recess(senate).
 power(president, grant(commissions)) :- recess(senate).
 /*Commisions shall expire*/
 
-
-
 commanderInChiefOfArmy(president).
 commanderInChiefOfNavy(president).
 commanderInChiefOfMilitia(president) :- inService(militia).
@@ -23,4 +21,5 @@ commanderInChiefOfMilitia(president) :- inService(militia).
 /* Requieres opinion of respective Head of Departments*/
 
 power(principalOfficer(Department), advice(president)).
-
+%Ammendment 25%
+vicePresident=presdient :- death(president); resignation(president);removalFromOffice(president). 
