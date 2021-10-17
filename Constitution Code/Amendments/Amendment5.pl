@@ -1,0 +1,1 @@
+not(power(congress, make(law)))
