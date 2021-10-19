@@ -20,7 +20,7 @@ witness(pennsylvania, thosFitzSimons).
 witness(pennsylvania, jaredIngersoll).
 witness(pennsylvania, jamesWilson).
 witness(pennsylvania, gouvMorris).
-witness(delaware, geo:Read).
+witness(delaware, geoRead).
 witness(delaware, gunningBedfordJun).
 witness(delaware, johnDickinson).
 witness(delaware, richardBassett).
@@ -29,7 +29,7 @@ witness(maryland, jamesMcHenry).
 witness(maryland, danOfStThosJenifer).
 witness(maryland, danlCarroll).
 witness(virginia, johnBlair).
-witness(virginia, jamesMadison Jr.).
+witness(virginia, jamesMadisonJr).
 witness(northCarolina, wmBlount).
 witness(northCarolina, richdDobbsSpaight).
 witness(northCarolina, huWilliamson).
