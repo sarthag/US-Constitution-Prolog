@@ -1,6 +1,7 @@
 establishmentOfConstitution(nineStates) :-
     ratification(conventions(nineStates)).
 dateOfRatification(17/09/1787).
+
 witness(State,Name).
 witness(New Hampshire, John Langdon).
 witness(New Hampshire, Nicholas Gilman).
@@ -27,4 +28,16 @@ witness(Delaware, Richard Bassett).
 witness(Delaware, Jaco: Broom).
 witness(Maryland, James McHenry).
 witness(Maryland, Dan of St. Thos. Jenifer).
-witness(Maryland, Danl Carroll ).
+witness(Maryland, Danl Carroll).
+witness(Virginia, John Blair).
+witness(Virginia, James Madison Jr.).
+witness(North Carolina, Wm. Blount).
+witness(North Carolina, Richd. Dobbs Spaight).
+witness(North Carolina, Hu Williamson).
+witness(South Carolina, J. Rutledge).
+witness(South Carolina, Charles Cotesworth Pinckney).
+witness(South Carolina, Charles Pinckney).
+witness(South Carolina, Pierce Butler).
+witness(Georgia, William Few).
+witness(Georgia, Abr Baldwin).
+witness(Washington, Secretary William Jackson).
