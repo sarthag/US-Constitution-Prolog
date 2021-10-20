@@ -1,0 +1,1 @@
+/* Modifies Article 2 Section 1 */

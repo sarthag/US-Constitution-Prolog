@@ -24,3 +24,5 @@ controversy1(X,Y) :-
     controversy2(foreignState, citizen(State1)).
 originalJurisdiction(supremeCourt) :- caseOf1; controversy1(X,Y).
 appellateJurisdiction(supremeCourt) :- caseOf2; caseOf3; controversy2(X,Y).
+
+trailByJury(Accused,State) :- crime(Accused,State).
