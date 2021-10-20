@@ -1,5 +1,5 @@
 establishmentOfConstitution(nineStates) :-
-    ratification(conventions(nineStates)).
+    ratification(nineStates).
 dateOfRatification(17/09/1787).
 
 witness(newHampshire, johnLangdon).
@@ -45,4 +45,4 @@ congressElects(Day1,Day2,Time,Place) :- ratification(nineStates).
 ratification(nineStates) :- conventionOfDelegates(assent, State1) , conventionOfDelegates(assent, State2) , conventionOfDelegates(assent, State3) , conventionOfDelegates(assent, State4) , conventionOfDelegates(assent, State5) , conventionOfDelegates(assent, State6) , conventionOfDelegates(assent, State7) , conventionOfDelegates(assent, State8) , conventionOfDelegates(assent, State9).
 electorsAppointed(State1,Day1) :- congressElects(Day1,Day2,Time,Place).
 electorsVote(president, Day2) :- congressElects(Day1,Day2,Time,Place).
-SenatorsRepresentativesConvene(Time,Place) :- congressElects(Day1,Day2,Time,Place).
+convene(senators,representatives,Time,Place) :- congressElects(Day1,Day2,Time,Place).
