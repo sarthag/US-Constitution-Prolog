@@ -1,6 +1,7 @@
 tenderList([gold,silver]).
 paymentOfDebts(Mode) :- not(member(Mode,tenderList)).
 billsNotAllowed([billOfAttainder,exPostFactoLaw,impairingObligationOfContracts,grant(titleOfNobility)]).
+
 /*passBill is for passing disallowed bills*/
 cantPassBill(Bill) :- member(Bill,billsNotAllowed)
 notAllowedForStates([entering([Treaty,Alliance,Confederation]),
