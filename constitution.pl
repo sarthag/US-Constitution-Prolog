@@ -522,6 +522,18 @@ right(Citizen, security(against(unreasonable(X)))) :-
 
 /* Amendment 6 */
 
+/* rights of accused */
+right(Accused,speedyAndPublicTrial).
+right(Accused, informedOfNatureAndCause(accusation)).
+right(Accused,confronted(witnessesAgainst)).
+right(Accused,obtaining(witnessesFor)).
+right(Accused,have(assistenceOfCounsel)).
+
+
+/*Trial in same state or district where the crime has occured. */
+placeOfCrime(DistrictOrState).
+
+trial(NameOfAccused,CrimeDistrictOrState,TrialDistrictOrState) :- (placeOfCrime(CrimeDistrictOrState),CrimeDistrictOrState == TrialDistrictOrState).
 
 /* Amendment 7 */
 
@@ -535,6 +547,9 @@ not(reexamination(facts)) :-
 
 /* Amendment 8 */
 
+notAllowed(X) :- member(X, [excessiveBail,excessiveFines,cruelPunishments]).
+
+/*Checks if given action towards criminal is disallowed */
 
 /* Amendment 9 */
 
