@@ -69,3 +69,7 @@ nominate(president,vicePresidentCandidate) :- vacancy(office(vicePresident)).
     majorityVote(senate, vicePresidentCandidate).
     
 /*Section 3*/
+(vicePresident=actingPresident) :- 
+    writtenDeclaration((president,unableToDischarge[powers(office),duties(office)]), [presidentProTempore(senate), speaker(houseOfRepresentatives)]).
+
+/*Section 4*/
