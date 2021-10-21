@@ -625,7 +625,10 @@ power(congress, enforce(article, legislation)).
 
 /* Amendment 16 */
 
-
+power(congress, withoutRegardTo(source, layOrCollect(taxes))).
+power(congress, withoutRegardTo(apportionmentAmongStates, layOrCollect(taxes))).
+power(congress, withoutRegardTo(census, layOrCollect(taxes))).
+power(congress, withoutRegardTo(enumeration, layOrCollect(taxes))).
 
 /* Amendment 17 */
 
@@ -637,7 +640,11 @@ power(congress, enforce(article, legislation)).
 
 /* Amendment 19 */
 
+/* compiles without error but cannot query and not keyword is sus */
 
+not(denied(rightToVote(citizen(StateA), basedOn(sex)))).
+
+power(congress, enforceArticle(legislation))
 
 /* Amendment 20 */
 
