@@ -1,7 +1,5 @@
 appropriation(money, 1).
 rebelInvations.
-militia.
-call(_).
 
 power(congress, layAndCollect(X)) :- 
     member(X, [tax, duties, imposts, excises]).
@@ -60,7 +58,7 @@ power(congress, porvide(call(militia))).
 conditionsOfsupression(X) :- member(X,[insurrections,rebelInvasions]).
 surpress(insurrections) :- insurrections.
 surpress(rebelInvations) :- rebelInvations.
-supress(X) :- conditionsOfsupression(X)
+supress(X) :- conditionsOfsupression(X).
 call(militia) :- 
     execute(lawsOfUnion);
     surpress(insurrections);
@@ -72,6 +70,6 @@ power(congress, governing(militia)) :- inService(militia).
 power(congress, appoint(ofiicers(militia))).
 power(congress, prescribe(discipline(training(militia)))).
 
-power(congress, exercise(exlusive(legislation(becomes(seat(government(theUS), district))))))
+power(congress, exercise(exlusive(legislation(becomes(seat(government(theUS), district)))))).
 power(congress, exercise(authority(purchased(places)))) :- consent(legislation(state)).
 power(congress, make(laws(necessaryAndProper(power(constitution))))).
