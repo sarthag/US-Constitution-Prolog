@@ -581,10 +581,15 @@ not(judicialPowers(construed(extend(suitInEquity(citizen(StateA), subject(foreig
 
 /* Section 1 */
 
+exist(slavery, usJurisdiction) :-
+    punishment(crime, dulyConvicted(party)).
+
+exist(involuntaryServitude, usJurisdiction) :-
+    punishment(crime, dulyConvicted(party)).
 
 /* Section 2 */
 
-
+power(congress, enforceArticle(legislation))
 
 /* Amendment 14 */
 
