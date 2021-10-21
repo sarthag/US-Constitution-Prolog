@@ -1,6 +1,6 @@
 /* rights of accused */
 right(Accused,speedyAndPublicTrial).
-right(Accused, informedOfNatureAndCause(Accusation)).
+right(Accused, informedOfNatureAndCause(accusation)).
 right(Accused,confronted(witnessesAgainst)).
 right(Accused,obtaining(witnessesFor)).
 right(Accused,have(assistenceOfCounsel)).
