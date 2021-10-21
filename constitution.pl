@@ -405,6 +405,6 @@ power(congress, make(laws(necessaryAndProper(power(constitution))))).
 
 /* Section 2 */
 
-power(congress, enforce(article)).
+power(congress, enforce(article(amendment26))).
 
 /* Amendment 27 */
