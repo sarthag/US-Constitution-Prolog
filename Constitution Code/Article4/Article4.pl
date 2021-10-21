@@ -1,4 +1,4 @@
-/* Section 1 /*
+/* Section 1 */
 act(StateB).
 record(StateB).
 judicialProceeding(StateB).
@@ -8,7 +8,9 @@ faith(StateA, StateB) :-
 	judicialProceeding(StateB)), 
 	stateOfUS(StateA), 
 	stateOfUS(StateB).
- /* Section 2 /*
+
+
+ /* Section 2 */
  removed(citizen, StateA, StateB):-
     (charged(citizen, treason, StateA);
      charged(citizen, felony, StateA);
@@ -24,11 +26,11 @@ faith(StateA, StateB) :-
 */delivered up on Claim of the Party to whom such Service or Labour may be
 */due.] 
 
-/* Section 3 /*
+/* Section 3 */
 new(state) :- admitted(congress), (not(part(existingState));consent(legislature(existingState), consent(congress))).
 power(congress, rulesRegardingTerritory).
 
-/* Section 4 /*
+/* Section 4 */
 republicanGovernment(X):- stateOfUS(X).
 protectionAgainstInvasion(X):- stateOfUS(X).
 protectionAgainstDomesticViolence(X):- stateOfUS(X).
@@ -36,5 +38,3 @@ rightsAndPriviliges(citizen, StateA) :-
     rightsAndPriviliges(citizen, StateB),  
     stateOfUS(StateA), 
     stateOfUS(StateB).
-   
-    
