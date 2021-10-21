@@ -1,33 +1,36 @@
-power(congress, layAndCollect(tax)).
-power(congress, layAndCollect(duties)).
-power(congress, layAndCollect(imposts)).
-power(congress, layAndCollect(excises)).
+appropriation(money, 1).
+rebelInvations.
+militia.
+call(_).
 
-power(congress, spend(defense)).
-power(congress, spend(welfare)).
+power(congress, layAndCollect(X)) :- 
+    member(X, [tax, duties, imposts, excises]).
+
+power(congress, spend(X)) :- 
+    member(X, [defense, welfare]).
 
 power(congress, borrow(moneyOnCreditOf(theUs))).
 
-power(congress, regulate(commerce(with(foreign(nationals))))).
-power(congress, regulate(commerce(among(states)))).
-power(congress, regulate(commerce(with(indianTribes)))).
+power(congress, regulate(commerce(X))) :-
+    member(X, [with(foreign(nationals)), among(states), with(indianTribes)]).
 
-power(congress, establish(uniform(rules(naturalization)))).
-power(congress, establish(uniform(laws(bankrupcy)))).
+power(congress, establish(uniform(X))) :-
+    member(X, [rules(naturalization), laws(bankrupcy)]).
 
 power(congress, coin(currency)).
-power(congress, regulate(value(currency))).
-power(congress, regulate(exchangeRates(foreign(currency)))).
+power(congress, regulate(X)) :-
+    member(X, [value(currency). exchangeRates(foreign(currency))]).
 
-power(congress, punish(counterfeiting(securities))).
-power(congress, punish(counterfeiting(currency))).
+power(congress, punish(counterfeiting(X))) :-
+    member(X, [securities, currency]).
 
 power(congress, establish(postOffices)).
 power(congress, post(roads)).
-power(congress, provide(limitedTime(exlusive(right(writings, authours))))).
-power(congress, provide(limitedTime(exlusive(right(discoveries, inventors))))).
+power(congress, provide(limitedTime(exlusive(X)))) :-
+    member(X, [right(writings, authours), right(discoveries, inventors)]).
 
-power(congress, provide(tribunals(congress))) :- inferior(tribunals(congress), tribunals(supremeCourt)).
+inferior(tribunals(congress), tribunals(supremeCourt)).
+power(congress, provide(tribunals(congress))).
 
 power(congress, define(piracies(highSeas))).
 power(congress, punish(piracies(highSeas))).
@@ -37,12 +40,10 @@ power(congress, define(offences(lawOfNations))).
 power(congress, punish(offences(lawOfNations))).
 
 power(congress, declare(war)).
-power(congress, grant(letters(marque))).
-power(congress, grant(letters(marque))).
-power(congress, grant(letters(reprosal))).
-power(congress, grant(letters(reprosal))).
-power(congress, make(rules(captures(land)))).
-power(congress, make(rules(captures(water)))).
+power(congress, grant(letters(X))) :-
+    member(X, [marque, reprosal]).
+power(congress, make(rules(captures(X)))) :-
+    member(X, [land, water]).
 
 power(congress, raise(army)) :- (appropriation(money, Time), Time =< 2).
 power(congress, support(army)) :- (appropriation(money, Time), Time =< 2).
@@ -55,14 +56,18 @@ power(congress, make(rules(governmentAndRegulation(forces(land))))).
 power(congress, make(rules(governmentAndRegulation(forces(naval))))).
 
 power(congress, porvide(call(militia))).
+
+conditionsOfsupression(X) :- member(X,[insurrections,rebelInvasions]).
+surpress(insurrections) :- insurrections.
+surpress(rebelInvations) :- rebelInvations.
+supress(X) :- conditionsOfsupression(X)
 call(militia) :- 
     execute(lawsOfUnion);
     surpress(insurrections);
     surpress(rebelInvations).
 inService(militia) :- call(militia).
-power(congress, provide(organizing(militia))).
-power(congress, provide(arming(militia))).
-power(congress, provide(disciplining(militia))).
+power(congress, provide(X)) :-
+    member(X, [organizing(militia), arming(militia), disciplining(militia)]).
 power(congress, governing(militia)) :- inService(militia).
 power(congress, appoint(ofiicers(militia))).
 power(congress, prescribe(discipline(training(militia)))).
