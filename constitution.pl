@@ -562,6 +562,17 @@ not() keyword sus */
 
 /* Amendment 11 */
 
+/* cannot be queried because not keyword but does not show error while compiling */
+
+stateOfUS(StateA).
+stateOfUS(StateB).
+
+not(judicialPowers(construed(extend(suitInLaw(citizen(StateA), citizen(StateB)))))).
+not(judicialPowers(construed(extend(suitInEquity(citizen(StateA), citizen(StateB)))))).
+not(judicialPowers(construed(extend(suitInLaw(citizen(StateA), citizen(foreignState)))))).
+not(judicialPowers(construed(extend(suitInEquity(citizen(StateA), citizen(foreignState)))))).
+not(judicialPowers(construed(extend(suitInLaw(citizen(StateA), subject(foreignState)))))).
+not(judicialPowers(construed(extend(suitInEquity(citizen(StateA), subject(foreignState)))))).
 
 /* Amendment 12 */
 
