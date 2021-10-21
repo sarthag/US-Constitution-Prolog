@@ -99,7 +99,13 @@ content(journalOfProceedings,Fraction) :- includeYeasAndNays(members(house),Frac
 adjourn(house,TimeOfAdjourning) :- (TimeOfAdjourning =< 3).
 
 /* Section 6 */
+houseMembers([senators,representatives]).
+crimes([treason,felony,breachOfPeace]).
 
+compensation(houseMembers):- ascertained(law),paidFrom(treasuryOfUS).
+
+privilegedFromArrest(Person,Crime) :- member(Person,houseMembers), not(member(Crime,crimes)).
+appointment(Person,civilOffice) :- not(member(Person,houseMembers)).
 
 /* Section 7 */
 
