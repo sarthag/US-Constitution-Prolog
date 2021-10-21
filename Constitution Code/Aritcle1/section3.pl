@@ -30,6 +30,3 @@ power(senate,choose(presidentProTempore)) :- absent(vicePresident) ; exercise(vi
 power(senate,try(impeachment)) :- oathOrAffirmation(senate).
 try(president) :- preside(chiefJustice).
 convicted(Person,Fraction) :- (concurrence(senate, Fraction), Fraction > 2/3).
-
-
-
