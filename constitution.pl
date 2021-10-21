@@ -612,15 +612,7 @@ not() keyword sus */
 
 /* Amendment 18 */
 
-/* Section 1 */
-
-
-/* Section 2 */
-
-
-/* Section 3 */
-
-
+/* REPEALED BY AMENDMENT 21 */
 
 /* Amendment 19 */
 
