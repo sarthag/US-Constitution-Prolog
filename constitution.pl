@@ -51,8 +51,6 @@ militia.
 
 /* Article 1 */
 
-
-
 /* Section 1 */
 
 /* all legislative powers granted shall be vested in congress */
@@ -182,6 +180,7 @@ power(congress, governing(militia)) :- inService(militia).
 power(congress, appoint(ofiicers(militia))).
 power(congress, prescribe(discipline(training(militia)))).
 
+consent(legislation(state)).
 power(congress, exercise(exlusive(legislation(becomes(seat(government(theUS), district)))))).
 power(congress, exercise(authority(purchased(places)))) :- consent(legislation(state)).
 power(congress, make(laws(necessaryAndProper(power(constitution))))).
