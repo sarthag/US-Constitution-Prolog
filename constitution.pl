@@ -48,7 +48,6 @@ monday(2, 12, 2019).
 appropriation(money, 1).
 rebelInvations.
 militia.
-call(_).
 
 /* Article 1 */
 
@@ -107,7 +106,7 @@ privilegedFromArrest(Person, Crime) :-
 appointment(Person,civilOffice) :- not(member(Person,houseMembers)).
 
 /* Section 7 */
-power(houseOfRepresentatives, originate(bills(raisingRevenue)).
+power(houseOfRepresentatives, originate(bills(raisingRevenue))).
 power(senate, propose(amendments(bills(raisingRevenue)))).
 power(senate, concur(amendments(bills(raisingRevenue)))).
 
@@ -169,7 +168,7 @@ power(congress, porvide(call(militia))).
 conditionsOfsupression(X) :- member(X,[insurrections,rebelInvasions]).
 surpress(insurrections) :- insurrections.
 surpress(rebelInvations) :- rebelInvations.
-supress(X) :- conditionsOfsupression(X)
+supress(X) :- conditionsOfsupression(X).
 call(militia) :- 
     execute(lawsOfUnion);
     surpress(insurrections);
@@ -181,7 +180,7 @@ power(congress, governing(militia)) :- inService(militia).
 power(congress, appoint(ofiicers(militia))).
 power(congress, prescribe(discipline(training(militia)))).
 
-power(congress, exercise(exlusive(legislation(becomes(seat(government(theUS), district))))))
+power(congress, exercise(exlusive(legislation(becomes(seat(government(theUS), district)))))).
 power(congress, exercise(authority(purchased(places)))) :- consent(legislation(state)).
 power(congress, make(laws(necessaryAndProper(power(constitution))))).
 
@@ -266,10 +265,10 @@ caseOf4 :- controversy1(X,Y), controversy2(X,Y).
 controversy1(X,Y) :- 
   controversy1(state(State1),state(State2));
   controversy1(state(State1),citizen(State2));
-  controversy1(foerignState, state(State1).
+  controversy1(foerignState, state(State1)).
  controversy2(X,Y) :- 
     controversy2(citizen(State1),citizen(State2));
-    controversy2(citizen1(State1),citizen2(State1), 
+    controversy2(citizen1(State1),citizen2(State1)), 
     claimLandUnderGrant(citizen1(State1),State2),
     claimLandUnderGrant(citizen1(State1),State3);
     controversy2(foreignState, citizen(State1)).
