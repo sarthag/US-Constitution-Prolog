@@ -29,4 +29,4 @@ power(senate,choose(officers)) :- absent(vicePresident) ; exercise(vicePresident
 power(senate,choose(presidentProTempore)) :- absent(vicePresident) ; exercise(vicePresident,president).
 power(senate,try(impeachment)) :- oathOrAffirmation(senate).
 try(president) :- preside(chiefJustice).
-convicted(Person,Fraction) :- (concurrence(senate, Fraction), Fraction > 2/3).
+convicted(Person,Fraction) :- (concurrence(senate, Fraction), Fraction > 2//3).
