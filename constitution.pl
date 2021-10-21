@@ -108,7 +108,9 @@ privilegedFromArrest(Person,Crime) :- member(Person,houseMembers), not(member(Cr
 appointment(Person,civilOffice) :- not(member(Person,houseMembers)).
 
 /* Section 7 */
-
+power(houseOfRepresentatives, originate(bills(raisingRevenue)).
+power(senate, propose(amendments(bills(raisingRevenue)))).
+power(senate, concur(amendments(bills(raisingRevenue)))).
 
 /* Section 8 */
 power(congress, layAndCollect(X)) :- 
