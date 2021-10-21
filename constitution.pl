@@ -538,9 +538,9 @@ not(reexamination(facts)) :-
 
 /* Amendment 9 */
 
-//not(deny(enumerated(rights, constitution), person, otherRights)).
+/* not(deny(enumerated(rights, constitution), person, otherRights)).
 
-// not keyword sus
+not() keyword sus */
 
 /* Amendment 10 */
 
