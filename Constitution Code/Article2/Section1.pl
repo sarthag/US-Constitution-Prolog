@@ -32,7 +32,7 @@ transmit(signAndCertify(makeList(persons, numVotes)), seat(govenment(theUS), pre
 
 /* 
 if no Person
-have a Majority, then from the fi ve highest on the List
+have a Majority, then from the five highest on the List
 the said House shall in like Manner chuse the President.
 But in chusing the President, the Votes shall be taken by
 States, the Representation from each State having one Vote;
@@ -62,6 +62,10 @@ qualified(X, president) :-
     removalFromOffice(president).
 
 /* Section 2 */
-
-
-
+nominate(president,vicePresidentCandidate) :- vacancy(office(vicePresident)).
+(vicePresidentCandidate=vicePresident) :- 
+    nominate(president,vicePresidentCandidate), 
+    majorityVote(houseOfRepresentatives, vicePresidentCandidate), 
+    majorityVote(senate, vicePresidentCandidate).
+    
+/*Section 3*/
