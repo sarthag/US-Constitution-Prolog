@@ -87,4 +87,12 @@ resume(president, [powers(office),duties(office)]) :-
     writtenDeclaration
         (president, 
         [presidentProTempore(senate), speaker(houseOfRepresentatives)],
-        ableToDischarge[powers(office),duties(office)]).
+        ableToDischarge[powers(office),duties(office)]),
+        (ObjectionClause(timeInDays)=false).
+ObjectionClause(timeInDays) :-     
+    writtenDeclaration
+        (X, 
+        [presidentProTempore(senate), speaker(houseOfRepresentatives)],
+        unableToDischarge(president,[powers(office),duties(office)])),
+    X=[vicePresident, majority(principalOfficers(executiveDepartments))]; specificBody(congress,law),
+    timeInDays<4.
