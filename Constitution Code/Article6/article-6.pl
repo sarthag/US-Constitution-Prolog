@@ -1,14 +1,30 @@
-validUnderConstitution(debts) :- contracted(beforeAdoption).
-validUnderConstitution(engagements) :- entered(beforeAdoption).
+debt(a).
+contracted(a, beforeAdoption).
+engagement(b).
+entered(b, beforeAdoption).
 
-supremeLawOfTheLand(constitution).
-supremeLawOfTheLand(lawsMadeFor(constitution)).
-supremeLawOfTheLand(treatiesMadeUnder(authorityOfUS)).
+validUnderConstitution(debt(X)) :-
+    contracted(X, beforeAdoption).
+
+validUnderConstitution(engagement(X)) :- 
+    entered(X, beforeAdoption).
+
+constitution(c).
+authorityOfUS(d).
+
+not(contradict(c, thingInConstitution)).
+not(contradict(X, stateLaws)).
+
+supremeLawOfTheLand(X) :-
+    constitution(X).
+supremeLawOfTheLand(X) :-
+    lawsMadeFor(constitution(X)).
+supremeLawOfTheLand(treatiesMadeUnder(authorityOfUS(X))).
 
 judgesBoundBy(X) :-
     supremeLawOfTheLand(X),
-    not(contradict(thingInConstitution)),
-    not(contradict(stateLaws)).
+    not(contradict(X, thingInConstitution)),
+    not(contradict(X, stateLaws)).
 
 boundByOathOrAffirmation(X) :-
     senator(X);
@@ -17,6 +33,5 @@ boundByOathOrAffirmation(X) :-
     executiveOfficer(X);
     judicialOfficer(X).
 
-/*  no religious Test shall ever
-be required as a Qualifi cation to any Offi ce or public Trust
-under the United States. */
+not(required(religiousTest, qualification(office))).
+not(required(religiousTest, qualification(publicTrust))).
