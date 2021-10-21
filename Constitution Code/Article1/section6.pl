@@ -1,7 +1,6 @@
-houseMembers([senators,representatives]).
-crimes([treason,felony,breachOfPeace]).
-
 compensation(houseMembers):- ascertained(law),paidFrom(treasuryOfUS).
 
-privilegedFromArrest(Person,Crime) :- member(Person,houseMembers), not(member(Crime,crimes)).
+privilegedFromArrest(Person, Crime) :- 
+    member(Person, [senator, representative]), 
+    not(member(Crime, [treason, felony, breachOfPeace])).
 appointment(Person,civilOffice) :- not(member(Person,houseMembers)).
