@@ -21,4 +21,3 @@ commanderInChiefOfMilitia(president) :- inService(militia).
 /* Requieres opinion of respective Head of Departments*/
 
 power(principalOfficer(Department), advice(president)).
-
