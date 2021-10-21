@@ -589,7 +589,7 @@ exist(involuntaryServitude, usJurisdiction) :-
 
 /* Section 2 */
 
-power(congress, enforceArticle(legislation))
+power(congress, enforceArticle(legislation)).
 
 /* Amendment 14 */
 
@@ -644,7 +644,7 @@ power(congress, withoutRegardTo(enumeration, layOrCollect(taxes))).
 
 not(denied(rightToVote(citizen(StateA), basedOn(sex)))).
 
-power(congress, enforceArticle(legislation))
+power(congress, enforceArticle(legislation)).
 
 /* Amendment 20 */
 
@@ -668,15 +668,18 @@ power(congress, enforceArticle(legislation))
 
 /* Amendment 21 */
 
-/* Section 1 */
-
+*/ Section 1 repealed amendment 18 */
 
 /* Section 2 */
 
+prohibited(transportation(intoxicatingLiquors, unitedStates)) :- violation(law).
+prohibited(importation(intoxicatingLiquors, unitedStates)) :- violation(law).
+prohibited(use(intoxicatingLiquors, unitedStates)) :- violation(law).
 
 /* Section 3 */
 
-
+operative(thisArticle) :- 
+   ratified(amendment(constitution), threeFourth(states), withinYears(7)).
 
 /* Amendment 22 */
 
