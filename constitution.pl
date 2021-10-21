@@ -698,6 +698,8 @@ operative(thisArticle) :-
 
 /* Amendment 23 */
 
+/* Fucked code needs to be rewritten */
+
 /* Section 1 */
 
 
