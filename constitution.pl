@@ -613,10 +613,15 @@ power(congress, enforceArticle(legislation))
 
 /* Section 1 */
 
+/* compiles without error but cannot query and not keyword is sus */
+
+not(denied(rights(citizen(StateA), basedOn(race)))).
+not(denied(rights(citizen(StateA), basedOn(color)))).
+not(denied(rights(citizen(StateA), basedOn(previousConditionOfServitude)))).
 
 /* Section 2 */
 
-
+power(congress, enforce(article, legislation)).
 
 /* Amendment 16 */
 
