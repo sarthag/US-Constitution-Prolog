@@ -525,13 +525,22 @@ right(Citizen, security(against(unreasonable(X)))) :-
 
 /* Amendment 7 */
 
+preserved(right(trialByJury)) :- 
+    (valueInControversy(Money), 
+    Money > 20).
 
+not(reexamination(facts)) :- 
+    (valueInControversy(Money), 
+    Money > 20). 
 
 /* Amendment 8 */
 
 
 /* Amendment 9 */
 
+//not(deny(enumerated(rights, constitution), person, otherRights)).
+
+// not keyword sus
 
 /* Amendment 10 */
 
