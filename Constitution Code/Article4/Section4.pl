@@ -1,3 +1,3 @@
-guaranteed(state, republicanGovernment).
-guaranteed(state, protection(invasion)).
-guaranteed(state, protection(domesticViolence)).
+republicanGovernment(X):- stateOffUS(X).
+protectionAgainstInvasion(X):- stateOfUS(X).
+protectionAgainstDomesticViolence(X):- stateOfUS(X).
