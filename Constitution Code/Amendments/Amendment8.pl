@@ -1,5 +1,3 @@
-notCriminalRights ([excessiveBail,excessiveFines,cruelPunishments]).
-
-notAllowed(X) :- member(X,notCriminalRights).
+notAllowed(X) :- member(X, [excessiveBail,excessiveFines,cruelPunishments]).
 
 /*Checks if given action towards criminal is disallowed */

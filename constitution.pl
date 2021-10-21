@@ -368,11 +368,13 @@ takes away the unrevokable rights */
 /* Amendment 2 */
 right(Person, keepAndBear(arms)) :- (citizen(Name, Time), Time >= 0).
 
+
 /* Amendment 3 */
 not(quarted(soldier, house(Citizen))) :- 
     (peace;
     (consent(Citizen), (citizen(Citizen, Time), Time >= 0))),
     perscribed(byLaw).
+
 
 /* Amendment 4 */
 isuued(warrant) :- 

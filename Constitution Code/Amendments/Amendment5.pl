@@ -1,18 +1,15 @@
-right(Citizen, not(held(answer(capitalCrime)))) :- 
-    not(presentment(grandJury));
-    not(indictment(grandJury));
-    not(service(land));
-    not(service(naval)).
-right(Citizen, not(held(answer(imfamousCrime)))) :- 
-    not(presentment(grandJury));
-    not(indictment(grandJury));
-    not(service(land));
-    not(service(naval)).
+right(Citizen, notHeldAnswerable(Crime)) :- 
+    (not(presentment(grandJury, Citizen));
+    not(indictment(grandJury, Citizen));
+    not(service(land, Citizen));
+    not(service(naval, Citizen))).
+    (member(Crime, [capitalCrime, infamousCrime])),
+    (citizen(Citizen, Time), Time >= 0),
+    
 
-right(Citizen, putInJeopardy(twice(sameOfffence))).
-right(Citizen, not(witness(against(Citizen)))).
+right(Citizen, putInJeopardy(twice(sameOfffence))) :- (citizen(Citizen, Time), Time >= 0).
+right(Citizen, not(witness(against(Citizen)))) :- (citizen(Citizen, Time), Time >= 0).
 
-rightsDuringTrial = [life, liberty, peroperty, taken(withoutCompensation(privateProperty))].
-right(Citizen, not(deprived(RightDuringTrial))) :- member(RightDuringTrial, rightsDuringTrial).
-
-
+right(Citizen, notDeprived(X)) :- 
+    member(X, [life, liberty, peroperty, taken(withoutCompensation(privateProperty))]),
+    (citizen(Citizen, Time), Time >= 0).
