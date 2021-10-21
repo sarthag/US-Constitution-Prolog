@@ -50,6 +50,10 @@ monday(2, 12, 2019).
 
 /* Section 1 */
 
+legistlativePowers :- congress.
+congress :- senate.
+congress :- houseOfRepresentatives.
+
 
 /* Section 2 */
 
@@ -313,11 +317,12 @@ monday(2, 12, 2019).
 
 /* Amendment 26 */
 
-/* Section 1 */
+/* Section1 */
 
+/* Modified in Amendment 14 Section 2 */
 
 /* Section 2 */
 
-
+power(congress, enforce(article)).
 
 /* Amendment 27 */
