@@ -709,12 +709,13 @@ operative(thisArticle) :-
 
 /* Amendment 24 */
 
-/* Section 1 */
+/* SECTION 1 */
 
+not(denied(rightToVote(citizen), failureToPay(taxes))).
 
-/* Section 2 */
+/* SECTION 2 */
 
-
+power(congress, enforceArticle(legislation)).
 
 /* Amendment 25 */
 
