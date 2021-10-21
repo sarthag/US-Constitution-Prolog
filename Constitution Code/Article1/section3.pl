@@ -1,8 +1,22 @@
-/*No of senators*/
+stateOfUS(newHampshire).
+stateOfUS(massachusetts).
+stateOfUS(connecticut).
+stateOfUS(newYork).
+stateOfUS(newJersey).
+stateOfUS(pennsylvania).
+stateOfUS(delaware).
+stateOfUS(maryland).
+stateOfUS(virginia).
+stateOfUS(northCarolina).
+stateOfUS(southCarolina).
+stateOfUS(georgia).
+/* Name of Senator */
 senator(Name).
-senators(stateOfUS(X),2).
+/*No of senators per state*/
+senatorsOfAnyState(stateOfUS(X),NumberOfSenators) :- stateOfUS(X), NumberOfSenators == 2.
+/*tenure of the senator */
 timeLapsed(StartYear,EndYear,Time) :- Time is (EndYear - StartYear)
-tenure(senator,YearOfStart,YearOfEnd):-(timeLapsed(YearOfStart,YearOfEnd,TimePeriod),TimePeriod=<6).
+tenure(senator(Name),YearOfStart,YearOfEnd):-(timeLapsed(YearOfStart,YearOfEnd,TimePeriod),TimePeriod=<6).
 /* each senator has one vote */
 vote(senator,1). 
 /*Term*/

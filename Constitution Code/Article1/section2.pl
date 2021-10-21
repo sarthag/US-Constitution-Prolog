@@ -1,4 +1,6 @@
-age(Name, Age).
+
+
+ageName, Age).
 citizen(Name, Years).
 resident(Name, stateOfUS(X)).
 elector(Name, stateOfUS(Residence), stateOfUS(Standing)) :-

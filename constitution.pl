@@ -48,11 +48,17 @@ monday(2, 12, 2019).
 
 /* Article 1 */
 
+
+
 /* Section 1 */
 
-legistlativePowers :- congress.
-congress :- senate.
-congress :- houseOfRepresentatives.
+
+/* all legislative powers granted shall be vested in congress */
+legislativePowers(congress).
+legislativePowers(X) :- congress(X).
+
+/* congress contains senate and house of representatives */
+congress(X) :- member(X,[senate,houseOfRepresentatives]).
 
 
 /* Section 2 */
