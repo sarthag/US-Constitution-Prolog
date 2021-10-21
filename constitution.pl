@@ -55,7 +55,6 @@ militia.
 
 /* Section 1 */
 
-
 /* all legislative powers granted shall be vested in congress */
 legislativePowers(congress).
 legislativePowers(X) :- congress(X).
@@ -97,6 +96,7 @@ content(journalOfProceedings,Fraction) :- includeYeasAndNays(members(house),Frac
 
 adjourn(house,TimeOfAdjourning) :- (TimeOfAdjourning =< 3).
 
+
 /* Section 6 */
 compensation(houseMembers):- ascertained(law),paidFrom(treasuryOfUS).
 
@@ -105,10 +105,12 @@ privilegedFromArrest(Person, Crime) :-
     not(member(Crime, [treason, felony, breachOfPeace])).
 appointment(Person,civilOffice) :- not(member(Person,houseMembers)).
 
+
 /* Section 7 */
 power(houseOfRepresentatives, originate(bills(raisingRevenue))).
 power(senate, propose(amendments(bills(raisingRevenue)))).
 power(senate, concur(amendments(bills(raisingRevenue)))).
+
 
 /* Section 8 */
 power(congress, layAndCollect(X)) :- 
