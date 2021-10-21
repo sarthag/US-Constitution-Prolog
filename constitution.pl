@@ -256,10 +256,27 @@ power(principalOfficer(Department), advice(president)).
 
 
 /* Section 3 */
+information(president, congress, stateOfUnion).
+recommend(president, congress, measures(A,B) :- measures(necessary,expedient).
+convene(president,houseOfRepresentatives,senate) :- occasion(extraordinary).
+convene(president,X) :- 
+  occasion(extraordinary),
+  X = houseOfRepresentatives; X = senate.
+adjourn(president, houseOfrepresentatives, senate) :- disagreement(houseOfrepresentatives, senate).
+receive(president, Y) :-
+  Y = ambassador(ForeignState), Y = publicMinister(ForeignState).
+  commission(president, officerOfUnitedStates).
 
 
 /* Section 4 */
+impeachment :- conviction(treason).
+impeachment :- conviction(bribery).
+impeachment :- conviction(highCrimes).
+impeachment :- conviction(misdeameanors).
 
+removed(president) :- impeachment.
+revoved(vicePresident) :- impeachment.
+removed(civilOfficers) :- impeachment.
 
 
 /* Article 3 */
