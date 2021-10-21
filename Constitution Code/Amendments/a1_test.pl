@@ -1,0 +1,10 @@
+age(rohan, 23).
+citizen(rohan, 23).
+age(meera, 30).
+citizen(meera, 8).
+age(david, 35).
+citizen(david, 35).
+age(leonard, 40).
+citizen(leonard, 40).
+age(amy, 38).
+citizen(amy, 5).

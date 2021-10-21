@@ -3,5 +3,7 @@ isuued(warrant) :-
     oathOfAfarmation, 
     particularDescription(placeSearched),
     particularDescription(peopleSeized).
-right(Citizen, security(against(unreasonable(searches)))).
-right(Citizen, security(against(unreasonable(seizures)))).
+
+right(Citizen, security(against(unreasonable(X)))) :-
+    member(X, [searches, seizures]),
+    (citizen(Citizen, Time), Time >= 0).
