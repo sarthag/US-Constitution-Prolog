@@ -333,15 +333,46 @@ powerOfPunishment(treason, congress).
 /* Article 4 */
 
 /* Section 1 */
+act(StateB).
+record(StateB).
+judicialProceeding(StateB).
+faith(StateA, StateB) :- 
+	(act(StateB); 
+	record(StateB); 
+	judicialProceeding(StateB)), 
+	stateOfUS(StateA), 
+	stateOfUS(StateB).
 
 
-/* Section 2 */
+ /* Section 2 */
+ removed(citizen, StateA, StateB):-
+    (charged(citizen, treason, StateA);
+     charged(citizen, felony, StateA);
+     charged(citizen, otherCrime, StateA)),
+    found(citizen, StateA),
+    demand(executiveAuthority(StateA), 
+    delivered(citizen, StateA),
+    stateOfUS(StateA), 
+    stateOfUS(StateB).
 
+/* [No Person held to Service or Labour in one State, under the Laws thereof, escaping into another, shall,
+in Consequence of any Law or Regulation therein, be discharged from such Service or Labour, but shall be 
+delivered up on Claim of the Party to whom such Service or Labour may be
+due.] */
 
 /* Section 3 */
-
+new(state) :- admitted(congress), (not(part(existingState));consent(legislature(existingState), consent(congress))).
+power(congress, rulesRegardingTerritory).
 
 /* Section 4 */
+republicanGovernment(X):- stateOfUS(X).
+protectionAgainstInvasion(X):- stateOfUS(X).
+protectionAgainstDomesticViolence(X):- stateOfUS(X).
+rightsAndPriviliges(citizen, StateA) :- 
+    rightsAndPriviliges(citizen, StateB),  
+    stateOfUS(StateA), 
+    stateOfUS(StateB).
+
 
 
 
@@ -390,7 +421,68 @@ not(required(religiousTest, qualification(publicTrust))).
 
 
 /* Article 7 */
+establishmentOfConstitution(nineStates) :-
+    ratification(nineStates).
 
+dateOfRatification(17, 09, 1787).
+
+witness(stateOfUS(newHampshire), johnLangdon).
+witness(stateOfUS(newHampshire), nicholasGilman).
+witness(stateOfUS(massachusetts), nathanielGorham).
+witness(stateOfUS(connecticut), wmSamlJohnson).
+witness(stateOfUS(connecticut), rogerSherman).
+witness(stateOfUS(connecticut), rogerSherman).
+witness(stateOfUS(connecticut), rogerSherman).
+witness(stateOfUS(newYork), alexanderHamilton).
+witness(stateOfUS(newJersey), wilLivingston).
+witness(stateOfUS(newJersey), davidBrearley).
+witness(stateOfUS(newJersey), wmPaterson).
+witness(stateOfUS(newJersey), jonaDayton).
+witness(stateOfUS(pennsylvania), bFranklin).
+witness(stateOfUS(pennsylvania), thomasMifflin).
+witness(stateOfUS(pennsylvania), robtMorris).
+witness(stateOfUS(pennsylvania), geoClymer).
+witness(stateOfUS(pennsylvania), thosFitzSimons).
+witness(stateOfUS(pennsylvania), jaredIngersoll).
+witness(stateOfUS(pennsylvania), jamesWilson).
+witness(stateOfUS(pennsylvania), gouvMorris).
+witness(stateOfUS(delaware), geoRead).
+witness(stateOfUS(delaware), gunningBedfordJun).
+witness(stateOfUS(delaware), johnDickinson).
+witness(stateOfUS(delaware), richardBassett).
+witness(stateOfUS(delaware), jacoBroom).
+witness(stateOfUS(maryland), jamesMcHenry).
+witness(stateOfUS(maryland), danOfStThosJenifer).
+witness(stateOfUS(maryland), danlCarroll).
+witness(stateOfUS(virginia), johnBlair).
+witness(stateOfUS(virginia), jamesMadisonJr).
+witness(stateOfUS(northCarolina), wmBlount).
+witness(stateOfUS(northCarolina), richdDobbsSpaight).
+witness(stateOfUS(northCarolina), huWilliamson).
+witness(stateOfUS(southCarolina), jRutledge).
+witness(stateOfUS(southCarolina), charlesCotesworthPinckney).
+witness(stateOfUS(southCarolina), charlesPinckney).
+witness(stateOfUS(southCarolina), pierceButler).
+witness(stateOfUS(georgia), williamFew).
+witness(stateOfUS(georgia), abrBaldwin).
+witness(stateOfUS(washington), secretaryWilliamJackson).
+
+congressElects(Day1,Day2,Time,Place) :- ratification(nineStates).
+
+ratification(nineStates) :- 
+        conventionOfDelegates(assent, State1) ,
+        conventionOfDelegates(assent, State2) ,
+        conventionOfDelegates(assent, State3) ,
+        conventionOfDelegates(assent, State4) ,
+        conventionOfDelegates(assent, State5) ,
+        conventionOfDelegates(assent, State6) ,
+        conventionOfDelegates(assent, State7) ,
+        conventionOfDelegates(assent, State8) ,
+        conventionOfDelegates(assent, State9).
+
+electorsAppointed(State1, Day1) :- congressElects(Day1, Day2, Time, Place).
+electorsVote(president, Day2) :- congressElects(Day1, Day2, Time, Place).
+convene(senators, representatives, Time, Place) :- congressElects(Day1, Day2, Time, Place).
 
 
 /* Amendments */
@@ -404,7 +496,7 @@ takes away the unrevokable rights */
 
 
 /* Amendment 2 */
-right(Person, keepAndBear(arms)) :- (citizen(Name, Time), Time >= 0).
+right(Citizen, keepAndBear(arms)) :- (citizen(Citizen, Time), Time >= 0).
 
 
 /* Amendment 3 */
