@@ -80,5 +80,11 @@ nominate(president,vicePresidentCandidate) :- vacancy(office(vicePresident)).
     writtenDeclaration
         (X, 
         [presidentProTempore(senate), speaker(houseOfRepresentatives)],
-        presidentUnableToDischarge[powers(office),duties(office)]),
+        unableToDischarge(president,[powers(office),duties(office)])),
     X=[vicePresident, majority(principalOfficers(executiveDepartments))]; specificBody(congress,law).
+
+resume(president, [powers(office),duties(office)]) :- 
+    writtenDeclaration
+        (president, 
+        [presidentProTempore(senate), speaker(houseOfRepresentatives)],
+        ableToDischarge[powers(office),duties(office)]).
