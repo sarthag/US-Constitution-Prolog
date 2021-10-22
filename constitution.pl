@@ -406,7 +406,6 @@ engage(war(Reason)) :- not(member(Reason,noConsentNeeded)).
 needsCongressConsent(Action) :- member(Action,needConsentOfCongress).
 
 
-
 /* Article 2 */
 
 /* Section 1 */
@@ -461,7 +460,6 @@ removed(civilOfficers) :- impeachment.
 
 
 /* Article 3 */
-
 /* Section 1 */
 judicialPowers :- congressOrdained(Court).
 congressOrdained(supremeCourt).
@@ -512,7 +510,6 @@ powerOfPunishment(treason, congress).
 
 
 /* Article 4 */
-
 /* Section 1 */
 act(StateB).
 record(StateB).
@@ -710,7 +707,18 @@ right(Citizen, security(against(unreasonable(X)))) :-
 
 
 /* Amendment 5 */
+citizen(amy, 5).
+right(Citizen, notHeldAnswerable(Crime, unlessThey(X))) :- 
+    (member(X, [presentment(grandJury), indictment(grandJury), service(land), service(naval)])),
+    (member(Crime, [capitalCrime, infamousCrime])),
+    (citizen(Citizen, Time), Time >= 0).
+    
+right(Citizen, putInJeopardy(twice(sameOfffence))) :- (citizen(Citizen, Time), Time >= 0).
+right(Citizen, not(witness(against(Citizen)))) :- (citizen(Citizen, Time), Time >= 0).
 
+right(Citizen, notDeprived(X)) :- 
+    member(X, [life, liberty, peroperty, taken(withoutCompensation(privateProperty))]),
+    (citizen(Citizen, Time), Time >= 0).
 
 /* Amendment 6 */
 
@@ -727,6 +735,7 @@ placeOfCrime(DistrictOrState).
 
 trial(NameOfAccused,CrimeDistrictOrState,TrialDistrictOrState) :- (placeOfCrime(CrimeDistrictOrState),CrimeDistrictOrState == TrialDistrictOrState).
 
+
 /* Amendment 7 */
 preserved(right(trialByJury)) :- 
     (valueInControversy(Money), 
@@ -741,10 +750,12 @@ notAllowed(X) :- member(X, [excessiveBail,excessiveFines,cruelPunishments]).
 
 /*Checks if given action towards criminal is disallowed */
 
+
 /* Amendment 9 */
 
 /* not(deny(enumerated(rights, constitution), person, otherRights)).
 not() keyword sus */
+
 
 /* Amendment 10 */
 power(stateOfUS(Y), X) :-
@@ -753,10 +764,9 @@ power(stateOfUS(Y), X) :-
     
 /* will throw error for power(X,Y), will not for power(congress, Y) */
 
+
 /* Amendment 11 */
-
 /* cannot be queried because not keyword but does not show error while compiling */
-
 stateOfUS(StateA).
 stateOfUS(StateB).
 
@@ -769,6 +779,26 @@ not(judicialPowers(construed(extend(suitInEquity(citizen(StateA), subject(foreig
 
 
 /* Amendment 12 */
+vote(elector(stateOfUS(X)), presidentialCandidate(stateOfUS(Y)),vicepresidentialCandidate(stateOfUS(Z))) :-
+    X\=Y;X\=Z.
+  transmit([seal(list(presidentialCandidates,votesForThem)),seal(list(vicepresidentialCandidates,votesForThem))], govtOfUS).
+  fractVote(PresCand,FractionVotes).
+  president(fractVote(PresCand,MaxFractionVotes)) :- MaxFractionVotes>0.5.
+  noMajorityProcedure :- fractVote(Cand,MaxFractionVotes), MaxFractionVotes<0.5.
+  candidateNoMajority(X) :- member(X, [fractVote(Cand1,Max1FractionVotes),fractVote(Cand2,Max2FractionVotes), fractVote(Cand3,Max3FractionVotes)]), noMajorityProcedure.
+  vote(houseOfRepresentatives,stateOfUS(Y), candidateNoMajority(X), Vote) :-
+    member(X, [fractVote(Cand1,Max1FractionVotes),fractVote(Cand2,Max2FractionVotes), fractVote(Cand3,Max3FractionVotes)]), 
+    (Vote=PresCand1;
+    Vote=PresCand2;
+    Vote=PresCand3).
+  fractVoteP(PresCand,FractionVotes).
+  vote(senate, stateOfUS(X), candidatesNoMajority(X) , Vote) :-
+    member(X, [fractVote(VPCand1,Max1FractionVotes),fractVote(VPCand2,Max2FractionVotes)]),
+    (Vote=VPCand1;
+    Vote=VPCand2).
+  fractVoteVP(VPCand,FractionVotes).
+  president(PresCand) :- fractVoteP(PresCand,FractionVotes), FractionVotes>0.5.
+  vicePresident(PresCand) :- fractVoteVP(VPCand,FractionVotes), FractionVotes>0.5.
 
 
 /* Amendment 13 */
@@ -847,7 +877,16 @@ power(congress, withoutRegardTo(census, layOrCollect(taxes))).
 power(congress, withoutRegardTo(enumeration, layOrCollect(taxes))).
 
 /* Amendment 17 */
+senate(stateOfUS(X), senators(2)).
+term(senator, 6).
+vote(senator,1). 
 
+haveQualifications(electors(stateOfUS), requisite(electors(stateLegislatures))).
+
+issue(executiveAuthority(stateOfUS), writOfElection(fillVacancies)) :-
+    empower(stateLegislature, stateExecutive(makeTemporaryAppointments)).
+
+not(affect(thisAmendment, electionOrTerm(senator(chosen(beforeRatification))))).
 
 
 /* Amendment 18 */
@@ -865,7 +904,6 @@ power(congress, enforceArticle(legislation)).
 /* Amendment 20 */
 
 /* SECTION 1 */
-
 end(term(president), date(1200, 20, january)).
 end(term(vicePresident), date(1200, 20, january)).
 end(term(senator), date(1200, 3, january)).
@@ -881,12 +919,11 @@ begins(term(RepresentativeB)) :-
     ended(term(RepresentativeA)).
 
 /* SECTION 2 */
-
 assemble(congress, atleastOnce(year), date(1200, 3, january)) :-
     not(appoint(differentDay)).
 
-/* SECTION 3 */
 
+/* SECTION 3 */
 become(president, vicePresident) :-
     dead(presidentElect, beginningOfTerm).
 
@@ -900,8 +937,8 @@ case1 :-
     not(qualify(presidentElect)),
     not(qualify(vicePresidentElect)).
 
-/* SECTION 4 */
 
+/* SECTION 4 */
 may(congress, byLaw(provide(case2))).
 
 case2 :- 
@@ -910,12 +947,11 @@ case2 :-
 
 
 /* SECTION 5 */
-
 takeEffect(section1, date(15, october), after(ratification(thisArticle))).
 takeEffect(section2, date(15, october), after(ratification(thisArticle))).
 
-/* SECTION 6 */
 
+/* SECTION 6 */
 operative(thisArticle) :-
     ratified(amendment(constitution), threeFourths(states), withinYears(7)).
 
@@ -978,9 +1014,7 @@ power(congress, enforceArticle(legislation)).
 
 
 /* Amendment 26 */
-
 /* Section1 */
-
 /* Modified in Amendment 14 Section 2 */
 
 /* Section 2 */
