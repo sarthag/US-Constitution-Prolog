@@ -276,6 +276,28 @@ power(congress, make(laws(necessaryAndProper(power(constitution))))).
 
 
 /* Section 9 */
+migration(State1,State2,Person).
+importation(X,Y,Z) :- migration(X,Y,Z).
+legal(Functor,Year).
+legal(migration(State1,State2,Person), Year) :- Year<1808.
+tax(migration(State1,State2,Person), Amount) :- Amount<10.
+not(writ(habeusCorpus)) :- 
+	case(rebellion);
+	case(invasion).
+not(pass(billOfAttainder)).
+not(pass(exFactoLaw)).
+capitation(tax) :-
+	tax is PropConst*Census.
+not(tax(ExportArea,article)) :- ExportState is stateOfUS(X).
+revenue(port(stateOfUS(X))).
+not(tax(vessel(State1,State2)),State2).
+not(titleOfNobility(theUS)).
+noConsent(congress).
+notAccept(Position ,person(holding(X)), From) :-
+	noConsent(congress),
+	member(Position, [present, emolument, office, title]),
+	member(X, [officePost, trust]),
+	member(From, [king,prince,foreignState]).
 
 
 /* Section 10 */
@@ -464,7 +486,19 @@ rightsAndPriviliges(citizen, StateA) :-
 
 
 /* Article 5 */
-
+called(congress, convention(proposingAmendments)):-
+    propose(((concurrence(senate, Fraction), Fraction > 0.666),(concurrence(houseOfRepresentatives, Fraction), Fraction > 0.666)), amendments);
+    applied(legislature(concurrence(statesOfUS, Fraction), Fraction > 0.666)).
+ratified(_).
+yearConditionsMet(Year) :- 
+    (Year > 1808; 
+    (not(modify(amendment, articleOne(sectionNine(firstClause)))),
+    not(modify(amendment, articleOne(sectionNine(firstClause))))),
+    not(deprive(state, amendment, equalSufferageInSenate))).
+valid(amendment, Year, Fraction1, Fraction2):-
+    (ratified(legislature(concurrence(statesOfUS, Fraction1), Fraction1 > 0.75));
+     ratified(convention(concurrence(statesOfUS, Fraction2), Fraction2 > 0.75))),
+    yearConditionsMet(Year).
 
 
 /* Article 6 */
@@ -663,13 +697,12 @@ not(judicialPowers(construed(extend(suitInEquity(citizen(StateA), citizen(foreig
 not(judicialPowers(construed(extend(suitInLaw(citizen(StateA), subject(foreignState)))))).
 not(judicialPowers(construed(extend(suitInEquity(citizen(StateA), subject(foreignState)))))).
 
+
 /* Amendment 12 */
 
 
 /* Amendment 13 */
-
 /* Section 1 */
-
 exist(slavery, usJurisdiction) :-
     punishment(crime, dulyConvicted(party)).
 
@@ -683,33 +716,57 @@ power(congress, enforceArticle(legislation)).
 /* Amendment 14 */
 
 /* Section 1 */
+citizenOf(X, unitedStates) :- (born(X, unitedStates); naturalised(X, unitedStates)), jurisdiction(X, unitedStates).
+citizenOf(X, State) :- citizenOf(X, unitedStates), reside(X, State).
+not(law(state)) :- abridges(law(state), priviliges(citizen)).
+not(law(state)) :- abridges(law(state), immunities(citizen)).
+not(deprive(state, X, life)) :- not(dueProcess(law)).
+not(deprive(state, X, liberty)) :- not(dueProcess(law)).
+not(deprive(state, X, property)) :- not(dueProcess(law)).
+not(deprive(state, X, equalRights)) :- jurisdiction(state, X).
 
+/* Section 2 (modifies article 1 section2) */
+basis(appointed(representative(Y, numberOfVoters(Y)))) :- stateOfUS(Y).
 
-/* Section 2 */
-
-
-/* Section 3 */
-
+/*Section 3 */
+conditionsPreventingFromHoldingOffice(X) :- 
+    (previously(takenOath(X, memberOfCongress)); previously(takenOath(X,officerOftheUnitedStates));previously(takenOath(X,memberOfStateLegislature)); previously(takenOath(X,executiveOfficer));previously(takenOath(X,judicialOfficer))),
+   (engaged(X, insurrection); engaged(X, rebellionAgainstConstitution); given(X, aidToUSEnemies)),
+   (not(vote(removeDisability, twoThirds(senate))), not(vote(removeDisability, twoThirds(houseOfRepresentatives)))).
+not(become(X, senator)) :- 
+    conditionsPreventingFromHoldingOffice(X).   
+not(become(X, representativeInCongress)) :- 
+    conditionsPreventingFromHoldingOffice(X).
+not(become(X, electorOfPresidentAndVicePresident)) :-
+   conditionsPreventingFromHoldingOffice(X).
+not(hold(X, civilOffice(unitedStates))) :-
+     conditionsPreventingFromHoldingOffice(X).  
+not(hold(X, militaryOffice(unitedStates))) :-
+    conditionsPreventingFromHoldingOffice(X). 
 
 /* Section 4 */
-
+not(questioned(validity(publicDebt(unitedStates, authorizedByLaw)))).
+not(questioned(validity(publicDebt(unitedStates, authorizedByLaw)))):- 
+    incurred(debt, paymentOfPensionsAndBounties(supressing(insurrectionOrRebellion(against(unitedStates))))).
+not(assume(incurred(debt, insurrectionOrRebellion(against(unitedStates))))).
+not(pay(incurred(debt, insurrectionOrRebellion(against(unitedStates))))).
+not(pay(claim(loss))).
+not(pay(claim(emancipationOfSlave))).
 
 /* Section 5 */
-
+power(congress, enforceArticle(legislation)).
 
 
 /* Amendment 15 */
-
 /* Section 1 */
 
 /* compiles without error but cannot query and not keyword is sus */
 
-not(denied(rights(Citizen, basedOn(race)))) :- (citizen(Citizen, Time), Time >= 0)..
+not(denied(rights(Citizen, basedOn(race)))) :- (citizen(Citizen, Time), Time >= 0).
 not(denied(rights(Citizen, basedOn(color)))) :- (citizen(Citizen, Time), Time >= 0).
 not(denied(rights(Citizen, basedOn(previousConditionOfServitude)))) :- (citizen(Citizen, Time), Time >= 0).
 
 /* Section 2 */
-
 power(congress, enforce(article, legislation)).
 
 /* Amendment 16 */
@@ -737,22 +794,61 @@ power(congress, enforceArticle(legislation)).
 
 /* Amendment 20 */
 
-/* Section 1 */
+/* SECTION 1 */
+
+end(term(president), date(1200, 20, january)).
+end(term(vicePresident), date(1200, 20, january)).
+end(term(senator), date(1200, 3, january)).
+end(term(representative), date(1200, 3, january)).
+
+begins(term(PresidentB)) :-
+    ended(term(PresidentA)).
+begins(term(VicePresidentB)) :-
+    ended(term(VicePresidentA)).
+begins(term(SenatorB)) :-
+    ended(term(SenatorA)).
+begins(term(RepresentativeB)) :-
+    ended(term(RepresentativeA)).
+
+/* SECTION 2 */
+
+assemble(congress, atleastOnce(year), date(1200, 3, january)) :-
+    not(appoint(differentDay)).
+
+/* SECTION 3 */
+
+become(president, vicePresident) :-
+    dead(presidentElect, beginningOfTerm).
+
+actingPresident(vicePresident, until(chosen(new(president)))) :-
+    not(chosen(president, before(beginningOfTerm)));
+    failed(qualify(presidentElect)).
+
+may(congress, byLaw(provide(case1))).
+
+case1 :- 
+    not(qualify(presidentElect)),
+    not(qualify(vicePresidentElect)).
+
+/* SECTION 4 */
+
+may(congress, byLaw(provide(case2))).
+
+case2 :- 
+    death(candidate(president, chosenBy(houseOfRepresentatives)));
+    death(candidate(vicePresident, chosenBy(senate))).
 
 
-/* Section 2 */
+/* SECTION 5 */
 
+takeEffect(section1, date(15, october), after(ratification(thisArticle))).
+takeEffect(section2, date(15, october), after(ratification(thisArticle))).
 
-/* Section 3 */
+/* SECTION 6 */
 
+operative(thisArticle) :-
+    ratified(amendment(constitution), threeFourths(states), withinYears(7)).
 
-/* Section 4 */
-
-
-/* Section 5 */
-
-
-/* Section 6 */
 
 
 /* Amendment 21 */

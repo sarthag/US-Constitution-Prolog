@@ -6,6 +6,18 @@ power(electors,choose('members of House of Representatives')).
 yearOfElection(houseOfRepresentatives,PrevElectionYear,NextElectionYear):- timeLapsed(PrevElectionYear,NextElectionYear,2).
 
 /* eligibility for being a member of house of representatives */
+age(rohan, 23).
+citizen(rohan, 23).
+age(meera, 30).
+citizen(meera, 8).
+age(david, 35).
+citizen(david, 35).
+age(leonard, 40).
+citizen(leonard, 40).
+age(amy, 38).
+citizen(amy, 5).
+
+
 qualified(X, houseOfRepresentatives) :- 
     (age(X, Age), Age >= 25), 
     (citizen(X, Years), Years >= 7),

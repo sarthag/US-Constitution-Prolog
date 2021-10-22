@@ -9,7 +9,7 @@ not(deprive(state, X, property)) :- not(dueProcess(law)).
 not(deprive(state, X, equalRights)) :- jurisdiction(state, X).
 
 /* Section 2 (modifies article 1 section2) */
-basis(appointed(representative(stateOfUS(Y), X) :- X = numberOfVoters(stateOfUS(Y)).
+basis(appointed(representative(Y, numberOfVoters(Y)))) :- stateOfUS(Y).
 
 /*Section 3 */
 conditionsPreventingFromHoldingOffice(X) :- 

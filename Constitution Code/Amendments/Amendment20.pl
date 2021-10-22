@@ -21,10 +21,10 @@ assemble(congress, atleastOnce(year), date(1200, 3, january)) :-
 
 /* SECTION 3 */
 
-becomePresident(vicePresident) :-
+become(president, vicePresident) :-
     dead(presidentElect, beginningOfTerm).
 
-actingPresident(vicePresident, until(chosen(newPresident))) :-
+actingPresident(vicePresident, until(chosen(new(president)))) :-
     not(chosen(president, before(beginningOfTerm)));
     failed(qualify(presidentElect)).
 
