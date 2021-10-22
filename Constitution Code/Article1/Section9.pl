@@ -10,10 +10,13 @@ not(pass(billOfAttainder)).
 not(pass(exFactoLaw)).
 capitation(tax) :-
 	tax is PropConst*Census.
-not(tax(ExportArea,article)) :- ExportState=stateOfUS(X).
+not(tax(ExportArea,article)) :- ExportState is stateOfUS(X).
 revenue(port(stateOfUS(X))).
 not(tax(vessel(State1,State2)),State2).
-not(titleOfNobility(unitedStates)).
-notAccept([present,emolument,office,title],person(X),[king,prince,foreignState]) :-
+not(titleOfNobility(theUS)).
+noConsent(congress).
+notAccept(Position ,person(holding(X)), From) :-
 	noConsent(congress),
-	(X=holding(officeOfProfit);X=holding(Trust)).
+	member(Position, [present, emolument, office, title]),
+	member(X, [officePost, trust]),
+	member(From, [king,prince,foreignState]).
