@@ -29,12 +29,12 @@ citizen(leonard, 40).
 age(amy, 38).
 citizen(amy, 5).
 
-resident(amy, stateOfUS(newYork)).
-elector(amy, stateOfUS(newYork)).
-resident(rohan, stateOfUS(newYork)).
-elector(rohan, stateOfUS(newJersy)).
-resident(david, stateOfUS(newYork)).
-elector(david, stateOfUS(newYork)).
+resident(amy, newYork).
+elector(amy, newYork).
+resident(rohan, newYork).
+elector(rohan, newJersy).
+resident(david, newYork).
+elector(david, newYork).
 born(rohan, usa).
 born(leonard, usa).
 born(meera, usa).
@@ -91,11 +91,15 @@ citizen(amy, 5).
 qualified(X, houseOfRepresentatives) :- 
     (age(X, Age), Age >= 25), 
     (citizen(X, Years), Years >= 7),
-    resident(X, stateOfUS(A)), 
-    elector(X, stateOfUS(A)).
+    (resident(X, State), stateOfUS(State)), 
+    (elector(X, State), stateOfUS(State)).
 
-taxProportion(stateOfUS(X),NoOfFreePersons,NoOfOtherPersons,Taxprop):- Taxprop is (NoOfFreePersons +(0.6*NoOfOtherPersons)).
-apportionedTaxes(stateOfUS(X),Numbers,NoOfFreePersons,NoOfOtherPersons) :- taxProportion(stateOfUS(X),NoOfFreePersons,NoOfOtherPersons,Numbers).
+taxProportion(State, NoOfFreePersons,NoOfOtherPersons,Taxprop):- 
+    (Taxprop is (NoOfFreePersons +(0.6*NoOfOtherPersons))),
+    stateOfUS(State).
+apportionedTaxes(State ,Numbers,NoOfFreePersons,NoOfOtherPersons) :- 
+    (taxProportion(stateOfUS(X),NoOfFreePersons,NoOfOtherPersons,Numbers)),
+    stateOfUS(State).
 
 /* time of enumeration */
 enumerationTime(YearOfFirstMeetingOfCongress,NextEnumeration):- timeLapsed(YearOfFirstMeetingOfCongress,NextEnumeration,3).
@@ -148,7 +152,7 @@ voterQualified(Y, positionOfOffice) :- (age(Y, Age), Age >= 18).
 /* Name of Senator */
 senator(Name).
 /*No of senators per state*/
-senatorsOfAnyState(stateOfUS(X),NumberOfSenators) :- stateOfUS(X), NumberOfSenators == 2.
+senatorsOfAnyState(State, NumberOfSenators) :- stateOfUS(State), NumberOfSenators == 2.
 /*tenure of the senator */
 
 timeLapsed(StartYear, EndYear, Time):- 
@@ -212,7 +216,7 @@ convicted(Person,Fraction) :- (concurrence(senate, Fraction), Fraction > 0.666).
 /* Section 4 */
 
 /*para1*/
-power(stateOfUS(X),make(electionRegulations)).
+power(State ,make(electionRegulations)) :- stateOfUS(State).
 power(congress,alter(electionRegulations)).
 
 /*meeting of the congress*/
@@ -604,49 +608,47 @@ establishmentOfConstitution(nineStates) :-
     ratification(nineStates).
 
 dateOfRatification(17, 09, 1787).
-
-witness(stateOfUS(newHampshire), johnLangdon).
-witness(stateOfUS(newHampshire), nicholasGilman).
-witness(stateOfUS(massachusetts), nathanielGorham).
-witness(stateOfUS(connecticut), wmSamlJohnson).
-witness(stateOfUS(connecticut), rogerSherman).
-witness(stateOfUS(connecticut), rogerSherman).
-witness(stateOfUS(connecticut), rogerSherman).
-witness(stateOfUS(newYork), alexanderHamilton).
-witness(stateOfUS(newJersey), wilLivingston).
-witness(stateOfUS(newJersey), davidBrearley).
-witness(stateOfUS(newJersey), wmPaterson).
-witness(stateOfUS(newJersey), jonaDayton).
-witness(stateOfUS(pennsylvania), bFranklin).
-witness(stateOfUS(pennsylvania), thomasMifflin).
-witness(stateOfUS(pennsylvania), robtMorris).
-witness(stateOfUS(pennsylvania), geoClymer).
-witness(stateOfUS(pennsylvania), thosFitzSimons).
-witness(stateOfUS(pennsylvania), jaredIngersoll).
-witness(stateOfUS(pennsylvania), jamesWilson).
-witness(stateOfUS(pennsylvania), gouvMorris).
-witness(stateOfUS(delaware), geoRead).
-witness(stateOfUS(delaware), gunningBedfordJun).
-witness(stateOfUS(delaware), johnDickinson).
-witness(stateOfUS(delaware), richardBassett).
-witness(stateOfUS(delaware), jacoBroom).
-witness(stateOfUS(maryland), jamesMcHenry).
-witness(stateOfUS(maryland), danOfStThosJenifer).
-witness(stateOfUS(maryland), danlCarroll).
-witness(stateOfUS(virginia), johnBlair).
-witness(stateOfUS(virginia), jamesMadisonJr).
-witness(stateOfUS(northCarolina), wmBlount).
-witness(stateOfUS(northCarolina), richdDobbsSpaight).
-witness(stateOfUS(northCarolina), huWilliamson).
-witness(stateOfUS(southCarolina), jRutledge).
-witness(stateOfUS(southCarolina), charlesCotesworthPinckney).
-witness(stateOfUS(southCarolina), charlesPinckney).
-witness(stateOfUS(southCarolina), pierceButler).
-witness(stateOfUS(georgia), williamFew).
-witness(stateOfUS(georgia), abrBaldwin).
-witness(stateOfUS(washington), secretaryWilliamJackson).
-
-congressElects(Day1,Day2,Time,Place) :- ratification(nineStates).
+wirness(newHampshire, johnLangdon).
+witness(newHampshire, nicholasGilman).
+witness(massachusetts, nathanielGorham).
+witness(connecticut, wmSamlJohnson).
+witness(connecticut, rogerSherman).
+witness(connecticut, rogerSherman).
+witness(connecticut, rogerSherman).
+witness(newYork, alexanderHamilton).
+witness(newJersey, wilLivingston).
+witness(newJersey, davidBrearley).
+witness(newJersey, wmPaterson).
+witness(newJersey, jonaDayton).
+witness(pennsylvania, bFranklin).
+witness(pennsylvania, thomasMifflin).
+witness(pennsylvania, robtMorris).
+witness(pennsylvania, geoClymer).
+witness(pennsylvania, thosFitzSimons).
+witness(pennsylvania, jaredIngersoll).
+witness(pennsylvania, jamesWilson).
+witness(pennsylvania, gouvMorris).
+witness(delaware, geoRead).
+witness(delaware, gunningBedfordJun).
+witness(delaware, johnDickinson).
+witness(delaware, richardBassett).
+witness(delaware, jacoBroom).
+witness(maryland, jamesMcHenry).
+witness(maryland, danOfStThosJenifer).
+witness(maryland, danlCarroll).
+witness(virginia, johnBlair).
+witness(virginia, jamesMadisonJr).
+witness(northCarolina, wmBlount).
+witness(northCarolina, richdDobbsSpaight).
+witness(northCarolina, huWilliamson).
+witness(southCarolina, jRutledge).
+witness(southCarolina, charlesCotesworthPinckney).
+witness(southCarolina, charlesPinckney).
+witness(southCarolina, pierceButler).
+witness(georgia, williamFew).
+witness(georgia, abrBaldwin).
+witness(washington, secretaryWilliamJackson).
+lects(Day1,Day2,Time,Place) :- ratification(nineStates).
 
 ratification(nineStates) :- 
         conventionOfDelegates(assent, State1) ,
@@ -744,9 +746,9 @@ not(deny(enumerated(rights, constitution), person, otherRights)).
 
 
 /* Amendment 10 */
-power(stateOfUS(Y), X) :-
+power(State, X) :-
     not(delegated(X, unitedStates, constitution)),
-    not(prohibited(X, stateOfUS(Y), constitution)).
+    not(prohibited(X, stateOfUS(State), constitution)).
     
 /* will throw error for power(X,Y), will not for power(congress, Y) */
 
@@ -860,7 +862,7 @@ power(congress, withoutRegardTo(enumeration, layOrCollect(taxes))).
 
 
 /* Amendment 17 */
-senate(stateOfUS(X), senators(2)).
+senate(X, senators(2)) :- stateOfUS(X).
 term(senator, 6).
 vote(senator,1). 
 
