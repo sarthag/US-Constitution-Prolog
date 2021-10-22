@@ -704,7 +704,7 @@ power(congress, enforceArticle(legislation)).
 
 /* compiles without error but cannot query and not keyword is sus */
 
-not(denied(rights(Citizen, basedOn(race)))) :- (citizen(Citizen, Time), Time >= 0)..
+not(denied(rights(Citizen, basedOn(race)))) :- (citizen(Citizen, Time), Time >= 0).
 not(denied(rights(Citizen, basedOn(color)))) :- (citizen(Citizen, Time), Time >= 0).
 not(denied(rights(Citizen, basedOn(previousConditionOfServitude)))) :- (citizen(Citizen, Time), Time >= 0).
 

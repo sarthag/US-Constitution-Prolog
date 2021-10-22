@@ -9,13 +9,6 @@ citizen(leonard, 40).
 age(amy, 38).
 citizen(amy, 5).
 
-resident(amy, stateOfUS(newYork)).
-elector(amy, stateOfUS(newYork)).
-resident(rohan, stateOfUS(newYork)).
-elector(rohan, stateOfUS(newJersy)).
-resident(david, stateOfUS(newYork)).
-elector(david, stateOfUS(newYork)).
-
 qualified(X, houseOfRepresentatives) :- 
     (age(X, Age), Age >= 25), 
     (citizen(X, Years), Years >= 7),

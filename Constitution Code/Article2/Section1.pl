@@ -1,17 +1,10 @@
-age(Name, Age).
-citizen(Name, Years).
-resident(Name, stateOfUS(X)).
-born(Name, Country).
-elector(Name, stateOfUS(Residence), stateOfUS(Standing)) :-
-    resident(Name, stateOfUS(Residence)).
-
 executivePower(president).
 term(president, 4).
 
 numElectors(stateOfUS(X), Electors) :- 
     numSenators(stateOfUS(X), Senators),
     numRepresentatives(stateOfUS(X), Representatives),
-    (Electors = Senators + Representatives).
+    Electors is (Senators + Representatives).
  
 elector(Name, _, _) :- not(holdingOffice(Name)).
 
@@ -21,12 +14,12 @@ voteByBallot(Elector, Person1, Person2) :-
      resident(Person2, stateOfUS(not(Standing)))).
 
 transmit(signAndCertify(makeList(persons, numVotes)), seat(govenment(theUS), presidentOfSenate)).
-(openCertificates(presidentOfSenate), count(numVotes)) :-
+openCertificates(presidentOfSenate), count(numVotes) :-
     presence(senate),
     presence(houseOfRepresentatives).
 
-(Candidate = president) :- maxVotes(Candidate).
-(Candidate  = president) :- 
+becomes(Candidate, president) :- maxVotes(Candidate).
+becomes(Candidate, president) :- 
     equalAndMajority(Candidate, Candidate2),
     chooseByBallot(houseOfRepresentatives, Candidate).
 
@@ -45,7 +38,7 @@ President. But if there should remain two or more who
 have equal Votes, the Senate shall chuse from them by Ballot the Vice President.
 */
 
-electionDay(chosenBy(congress), uniformAcross(theUS))
+electionDay(chosenBy(congress), uniformAcross(theUS)).
 
 qualified(X, president) :- 
     (age(X, Age), Age >= 35), 
@@ -56,43 +49,34 @@ qualified(X, president) :-
 /* Ammendment 25 */
 
 /* Section 1 */
-(vicePresident=president) :- 
+becomes(vicePresident, president) :- 
     death(president); 
     resignation(president);
     removalFromOffice(president).
 
 /* Section 2 */
 nominate(president,vicePresidentCandidate) :- vacancy(office(vicePresident)).
-(vicePresidentCandidate=vicePresident) :- 
+becomes(vicePresidentCandidate, vicePresident) :- 
     nominate(president,vicePresidentCandidate), 
     majorityVote(houseOfRepresentatives, vicePresidentCandidate), 
     majorityVote(senate, vicePresidentCandidate).
     
 /*Section 3*/
-(vicePresident=actingPresident) :- 
-    writtenDeclaration
-        (president, 
-        [presidentProTempore(senate), speaker(houseOfRepresentatives)],
-        unableToDischarge[powers(office),duties(office)]).
+becomes(vicePresident, actingPresident) :- 
+    (writtenDeclaration(X), 
+        member(X, [president, presidentProTempore(senate), speaker(houseOfRepresentatives)])),
+        unableToDischarge(powers(office)),
+        unableToDischarge(duties(office)).
 
 /*Section 4*/
-(vicePresident=actingPresident) :- 
-    writtenDeclaration
-        (X, 
-        [presidentProTempore(senate), speaker(houseOfRepresentatives)],
-        unableToDischarge(president,[powers(office),duties(office)])),
-    X=[vicePresident, majority(principalOfficers(executiveDepartments))]; specificBody(congress,law).
+becomes(vicePresident, actingPresident) :- 
+    (writtenDeclaration(X), 
+        member(X, [president, presidentProTempore(senate), speaker(houseOfRepresentatives), vicePresident, majority(principalOfficers(executiveDepartments))])),
+        unableToDischarge(powers(office)),
+        unableToDischarge(duties(office)).
 
 resume(president, [powers(office),duties(office)]) :- 
-    writtenDeclaration
-        (president, 
-        [presidentProTempore(senate), speaker(houseOfRepresentatives)],
-        ableToDischarge[powers(office),duties(office)]),
-        (ObjectionClause(timeInDays)=false).
-ObjectionClause(timeInDays) :-     
-    writtenDeclaration
-        (X, 
-        [presidentProTempore(senate), speaker(houseOfRepresentatives)],
-        unableToDischarge(president,[powers(office),duties(office)])),
-    X=[vicePresident, majority(principalOfficers(executiveDepartments))]; specificBody(congress,law),
-    timeInDays<4.
+        (writtenDeclaration(X), 
+        member(X, [president, presidentProTempore(senate), speaker(houseOfRepresentatives)])),
+        unableToDischarge(powers(office)),
+        unableToDischarge(duties(office)).
