@@ -35,6 +35,9 @@ resident(rohan, stateOfUS(newYork)).
 elector(rohan, stateOfUS(newJersy)).
 resident(david, stateOfUS(newYork)).
 elector(david, stateOfUS(newYork)).
+born(rohan, usa).
+born(leonard, usa).
+born(meera, usa).
 
 stateOfUS(newHampshire).
 stateOfUS(massachusetts).
@@ -90,24 +93,12 @@ qualified(X, houseOfRepresentatives) :-
     (citizen(X, Years), Years >= 7),
     resident(X, stateOfUS(A)), 
     elector(X, stateOfUS(A)).
-/* 
-Bracket Part 
-[Representatives and direct Taxes shall be apportioned
-among the several States which may be included within
-this Union, according to their respective Numbers, which
-shall be determined by adding to the whole Number of
-free Persons, including those bound to Service for a Term
-of Years, and excluding Indians not taxed, three fifths of
-all other Persons.]
-*/
 
 taxProportion(stateOfUS(X),NoOfFreePersons,NoOfOtherPersons,Taxprop):- Taxprop is (NoOfFreePersons +(0.6*NoOfOtherPersons)).
-
 apportionedTaxes(stateOfUS(X),Numbers,NoOfFreePersons,NoOfOtherPersons) :- taxProportion(stateOfUS(X),NoOfFreePersons,NoOfOtherPersons,Numbers).
 
 /* time of enumeration */
 enumerationTime(YearOfFirstMeetingOfCongress,NextEnumeration):- timeLapsed(YearOfFirstMeetingOfCongress,NextEnumeration,3).
-
 enumerationAfterTerm(PrevEnumerationYear,NextEnumerationYear) :- timeLapsed(PrevEnumerationYear,NextEnumerationYear,10).
 
 /*number of representatives should not exceed one for every 30000 */
@@ -674,7 +665,6 @@ convene(senators, representatives, Time, Place) :- congressElects(Day1, Day2, Ti
 
 
 /* Amendments */
-
 /* Amendment 1 */
 unRevokableRights([freedom(speech),freedom(press),right(peacably(assemble)),petition(redress(grievances))]).
 newLaw(Right) :- not(member(Right,unRevokableRights)).
@@ -720,8 +710,8 @@ right(Citizen, notDeprived(X)) :-
     member(X, [life, liberty, peroperty, taken(withoutCompensation(privateProperty))]),
     (citizen(Citizen, Time), Time >= 0).
 
-/* Amendment 6 */
 
+/* Amendment 6 */
 /* rights of accused */
 right(Accused,speedyAndPublicTrial).
 right(Accused, informedOfNatureAndCause(accusation)).
@@ -732,7 +722,6 @@ right(Accused,have(assistenceOfCounsel)).
 
 /*Trial in same state or district where the crime has occured. */
 placeOfCrime(DistrictOrState).
-
 trial(NameOfAccused,CrimeDistrictOrState,TrialDistrictOrState) :- (placeOfCrime(CrimeDistrictOrState),CrimeDistrictOrState == TrialDistrictOrState).
 
 
@@ -747,14 +736,11 @@ not(reexamination(facts)) :-
 
 /* Amendment 8 */
 notAllowed(X) :- member(X, [excessiveBail,excessiveFines,cruelPunishments]).
-
 /*Checks if given action towards criminal is disallowed */
 
 
 /* Amendment 9 */
-
-/* not(deny(enumerated(rights, constitution), person, otherRights)).
-not() keyword sus */
+not(deny(enumerated(rights, constitution), person, otherRights)).
 
 
 /* Amendment 10 */
@@ -766,7 +752,6 @@ power(stateOfUS(Y), X) :-
 
 
 /* Amendment 11 */
-/* cannot be queried because not keyword but does not show error while compiling */
 stateOfUS(StateA).
 stateOfUS(StateB).
 
@@ -809,12 +794,12 @@ exist(slavery, usJurisdiction) :-
 exist(involuntaryServitude, usJurisdiction) :-
     punishment(crime, dulyConvicted(party)).
 
-/* Section 2 */
 
+/* Section 2 */
 power(congress, enforceArticle(legislation)).
 
-/* Amendment 14 */
 
+/* Amendment 14 */
 /* Section 1 */
 citizenOf(X, unitedStates) :- (born(X, unitedStates); naturalised(X, unitedStates)), jurisdiction(X, unitedStates).
 citizenOf(X, State) :- citizenOf(X, unitedStates), reside(X, State).
@@ -859,9 +844,6 @@ power(congress, enforceArticle(legislation)).
 
 /* Amendment 15 */
 /* Section 1 */
-
-/* compiles without error but cannot query and not keyword is sus */
-
 not(denied(rights(Citizen, basedOn(race)))) :- (citizen(Citizen, Time), Time >= 0).
 not(denied(rights(Citizen, basedOn(color)))) :- (citizen(Citizen, Time), Time >= 0).
 not(denied(rights(Citizen, basedOn(previousConditionOfServitude)))) :- (citizen(Citizen, Time), Time >= 0).
@@ -869,12 +851,13 @@ not(denied(rights(Citizen, basedOn(previousConditionOfServitude)))) :- (citizen(
 /* Section 2 */
 power(congress, enforce(article, legislation)).
 
-/* Amendment 16 */
 
+/* Amendment 16 */
 power(congress, withoutRegardTo(source, layOrCollect(taxes))).
 power(congress, withoutRegardTo(apportionmentAmongStates, layOrCollect(taxes))).
 power(congress, withoutRegardTo(census, layOrCollect(taxes))).
 power(congress, withoutRegardTo(enumeration, layOrCollect(taxes))).
+
 
 /* Amendment 17 */
 senate(stateOfUS(X), senators(2)).
@@ -890,16 +873,13 @@ not(affect(thisAmendment, electionOrTerm(senator(chosen(beforeRatification))))).
 
 
 /* Amendment 18 */
-
 /* REPEALED BY AMENDMENT 21 */
 
+
 /* Amendment 19 */
-
-/* compiles without error but cannot query and not keyword is sus */
-
 not(denied(rightToVote(citizen(StateA), basedOn(sex)))).
-
 power(congress, enforceArticle(legislation)).
+
 
 /* Amendment 20 */
 
@@ -917,6 +897,7 @@ begins(term(SenatorB)) :-
     ended(term(SenatorA)).
 begins(term(RepresentativeB)) :-
     ended(term(RepresentativeA)).
+
 
 /* SECTION 2 */
 assemble(congress, atleastOnce(year), date(1200, 3, january)) :-
@@ -956,26 +937,21 @@ operative(thisArticle) :-
     ratified(amendment(constitution), threeFourths(states), withinYears(7)).
 
 
-
 /* Amendment 21 */
-
 /*Section 1 repealed amendment 18 */
 
 /* Section 2 */
-
 prohibited(transportation(intoxicatingLiquors, unitedStates)) :- violation(law).
 prohibited(importation(intoxicatingLiquors, unitedStates)) :- violation(law).
 prohibited(use(intoxicatingLiquors, unitedStates)) :- violation(law).
 
 /* Section 3 */
-
 operative(thisArticle) :- 
    ratified(amendment(constitution), threeFourth(states), withinYears(7)).
 
+
 /* Amendment 22 */
-
 /* Section 1 */
-
 not(elected(president, X)) :- heldOfficeTwice(X, president).
 not(elected(president, X)) :-
   heldOfficeOnce(X, president),
@@ -983,33 +959,41 @@ not(elected(president, X)) :-
 not(apply(thisArticle, X)) :- holdingOffice(X, while(not(operative(thisArticle)))).
 
 /* Section 2 */
-
 operative(thisArticle) :-
   ratified(amendment(constitution), threeFourth(states), withinYears(7)).
 
+
 /* Amendment 23 */
-
-/* Fucked code needs to be rewritten */
-
-/* Section 1 */
-
-
-/* Section 2 */
-
+/*Section 1*/
+sumHouses(districtOfColumbia, Sum) :-
+    numSenators(districtOfColumbia, Senators), 
+    numRepresentatives(districtOfColumbia, Representatives),
+    (Sum is Senators + Representatives).
+    
+    numElectors(districtOfColumbia, Electors, MinElectors, Sum) :-
+        numElectors(stateOfUS(MinELectors), MinElectors),
+        sumHouses(districtOfColumbia, Sum),
+        Sum < MinELectors,
+        Electors is Sum.
+    
+    numElectors(districtOfColumbia, Electors, MinElectors, Sum) :-
+        numElectors(stateOfUS(MinELectors), MinElectors),
+        sumHouses(districtOfColumbia, Sum),
+        Sum < MinELectors,
+        Electors is MinElectors.
+    
+    /*Section 2*/
+power(congress, enforceArticle(legislation)).
 
 
 /* Amendment 24 */
-
 /* SECTION 1 */
-
 not(denied(rightToVote(citizen), failureToPay(taxes))).
 
 /* SECTION 2 */
-
 power(congress, enforceArticle(legislation)).
 
 /* Amendment 25 */
-
 /* Done in Article 2 section 1 */
 
 
@@ -1018,7 +1002,10 @@ power(congress, enforceArticle(legislation)).
 /* Modified in Amendment 14 Section 2 */
 
 /* Section 2 */
-
 power(congress, enforce(article(amendment26))).
 
 /* Amendment 27 */
+not(takeEffect(law(varying(compensation(servicesOf(X)))))) :- 
+    (intervened(election(X))),
+    (member(X, [senator, representative])).
+    
