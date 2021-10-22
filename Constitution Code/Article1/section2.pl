@@ -1,14 +1,26 @@
+age(rohan, 23).
+citizen(rohan, 23).
+age(meera, 30).
+citizen(meera, 8).
+age(david, 35).
+citizen(david, 35).
+age(leonard, 40).
+citizen(leonard, 40).
+age(amy, 38).
+citizen(amy, 5).
 
-age(Name, Age).
-citizen(Name, Years).
-resident(Name, stateOfUS(X)).
-elector(Name, stateOfUS(Residence), stateOfUS(Standing)) :-
-    resident(Name, stateOfUS(Residence)).
+resident(amy, stateOfUS(newYork)).
+elector(amy, stateOfUS(newYork), stateOfUS(newYork)).
+resident(rohan, stateOfUS(newYork)).
+elector(rohan, stateOfUS(newYork), stateOfUS(newJersy)).
+resident(david, stateOfUS(newYork)).
+elector(david, stateOfUS(newYork), stateOfUS(newYork)).
 
-qualified(X, houseOfRepresentatives) :- 
+qualified(X, houseOfRepresenttives) :- 
     (age(X, Age), Age >= 25), 
-    (citizen(X, Years), Years >= 7), 
-    (elector(X, stateOfUS(Residence), stateOfUS(Standing)), Residence =/= Standing).
+    (citizen(X, Years), Years >= 7),
+    (elector(X, stateOfUS(Residence), stateOfUS(Residence))).
+    
 
 /* 
 Bracket Part 
