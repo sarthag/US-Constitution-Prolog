@@ -24,6 +24,7 @@ tenure(class3, YearOfFirstElection,YearOfEnd) :- timeLapsed(YearOfFirstElection,
 
 /* L resigns */
 resign(L).
+
 /*new senator if old senator resigns */
 newSenator(NewSenator,OldSenator) :- resign(OldSenator).
 power(executive,makeAppointments(newSenator)) :- resign(OldSenator).
