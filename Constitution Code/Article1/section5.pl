@@ -1,6 +1,5 @@
 concurrence(house,Fraction).
-senate.
-houseOfRepresentatives.
+
 
 disorderlyBehaviour(X).
 power(house,judge(elections(members))).
