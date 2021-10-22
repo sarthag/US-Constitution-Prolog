@@ -1,7 +1,7 @@
-call(congress, convention(proposingAmendments)):-
+called(congress, convention(proposingAmendments)):-
     propose(((concurrence(senate, Fraction), Fraction > 0.666),(concurrence(houseOfRepresentatives, Fraction), Fraction > 0.666)), amendments);
     applied(legislature(concurrence(statesOfUS, Fraction), Fraction > 0.666)).
-ratified(_)
+ratified(_).
 yearConditionsMet(Year) :- 
     (Year > 1808; 
     (not(modify(amendment, articleOne(sectionNine(firstClause))),
