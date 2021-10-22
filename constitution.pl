@@ -78,8 +78,6 @@ timeLapsed(StartYear, EndYear, Time):-
     var(Time),number(StartYear),number(EndYear) -> Time is EndYear-StartYear;
     StartYear =:= EndYear - Time.
 
-
-
 tenureOfSenator(senator(Name),YearOfStart,YearOfEnd):-(timeLapsed(YearOfStart,YearOfEnd,6)).
 /* each senator has one vote */
 vote(senator(Name),1). 
@@ -120,8 +118,6 @@ choose(F).
 /* X is under oath or affirmation */
 oathOrAffirmation(X).
 
-
-
 /*powers of the senate and the president of the senate */
 presidentOfSenate(vicePresident).
 power(presidentOfSenate,vote) :- concurrence(senate, 0.5).
@@ -132,7 +128,6 @@ power(senate,try(impeachment)) :- oathOrAffirmation(senate).
 
 try(president) :- preside(chiefJustice).
 convicted(Person,Fraction) :- (concurrence(senate, Fraction), Fraction > 0.666).
-
 
 
 /* Section 4 */
