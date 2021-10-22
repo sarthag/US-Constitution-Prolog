@@ -1,11 +1,14 @@
-call(congress, convention(proposingAmendments)):- 
-    propose((twoThirds(senate),twoThirds(houseOfRepresentatives)), amendments);
-    applied(legislature(twoThirds(statesOfUS))).
-valid(amendment):- 
-    (ratified(legislature(threeFourth(statesOfUS)));
-     ratified(convention(threeFourth(statesOfUS)))).
+call(congress, convention(proposingAmendments)):-
+    propose(((concurrence(senate, Fraction), Fraction > 0.666),(concurrence(houseOfRepresentatives, Fraction), Fraction > 0.666)), amendments);
+    applied(legislature(concurrence(statesOfUS, Fraction), Fraction > 0.666)).
+ratified(_)
+yearConditionsMet(Year) :- 
+    (Year > 1808; 
+    (not(modify(amendment, articleOne(sectionNine(firstClause))),
+    not(modify(amendment, articleOne(sectionNine(firstClause))))),
+    not(deprive(state, amendment, equalSufferageInSenate)).
+valid(amendment, Year, Fraction1, Fraction2):-
+    (ratified(legislature(concurrence(statesOfUS, Fraction1), Fraction1 > 0.75));
+     ratified(convention(concurrence(statesOfUS, Fraction2), Fraction2 > 0.75))),
+    yearConditionsMet(Year).
 
-*/ Provided that no Amendment which may be made prior to the Year One thousand eight hundred and
-*/ eight shall in any Manner affect the fi rst and fourth Clauses
-*/ in the Ninth Section of the fi rst Article; and that no State,
-*/ without its Consent, shall be deprived of its equal Suffrage in the Senate. /*
