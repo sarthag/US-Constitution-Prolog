@@ -11,5 +11,3 @@ valid(amendment, Year, Fraction1, Fraction2):-
     (ratified(legislature(concurrence(statesOfUS, Fraction1), Fraction1 > 0.75));
      ratified(convention(concurrence(statesOfUS, Fraction2), Fraction2 > 0.75))),
     yearConditionsMet(Year).
-
-
