@@ -1,13 +1,20 @@
 /*Section 1*/
-SumHouses((numSenators(districtOfColumbia, Senators), numRepresentatives(districtOfColumbia, Representatives)) = Senators + Representatives.
+sumHouses(districtOfColumbia, Sum) :-
+numSenators(districtOfColumbia, Senators), 
+numRepresentatives(districtOfColumbia, Representatives),
+(Sum = Senators + Representatives).
 
-numElectors((districtOfColumbia, Electors), numElectors(StateOfUS(MinELectors), MinElectors)) :-
-    SumHouses(districtOfColumbia) < MinELectors,
-    Electors = SumHouses((numSenators(districtOfColumbia, Senators), numRepresentatives(districtOfColumbia, Representatives)).
+numElectors(districtOfColumbia, Electors, MinElectors, Sum) :-
+    numElectors(StateOfUS(MinELectors), MinElectors),
+    sumHouses(districtOfColumbia, Sum),
+    Sum < MinELectors,
+    Electors = Sum.
 
-numElectors((districtOfColumbia, Electors), numElectors(StateOfUS(MinELectors), MinElectors)) :-
-    SumHouses(districtOfColumbia) > MinELectors,
-    Electors = MinELectors.
+numElectors(districtOfColumbia, Electors, MinElectors, Sum) :-
+    numElectors(StateOfUS(MinELectors), MinElectors),
+    sumHouses(districtOfColumbia, Sum),
+    Sum < MinELectors,
+    Electors = MinElectors.
 
 /*Section 2*/
 power(congress,enforceByLegislation).
