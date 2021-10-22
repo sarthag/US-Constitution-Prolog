@@ -271,9 +271,9 @@ power(senate, concur(amendments(bills(raisingRevenue)))).
 
 
 /* Section 8 */
-rebelInvations.
 appropriation(money, 1).
-insurrections.
+consent(legislation(state)).
+
 power(congress, layAndCollect(X)) :- 
     member(X, [tax, duties, imposts, excises]).
 
@@ -332,19 +332,14 @@ conditionsOfsupression(X) :- member(X,[insurrections,rebelInvasions]).
 surpress(insurrections) :- insurrections.
 surpress(rebelInvations) :- rebelInvations.
 supress(X) :- conditionsOfsupression(X).
-
-called(militia) :-  
-    executeLawsOfUnion;
-    insurrections;
-    rebelInvations.
-inService(militia) :- called(militia).
+inService(militia, Reason) :- 
+    member(Reason, [executeLawsOfUnion, insurrections, rebelInvasions]).
 power(congress, provide(X)) :-
     member(X, [organizing(militia), arming(militia), disciplining(militia)]).
-power(congress, governing(militia)) :- inService(militia).
+power(congress, governing(militia)) :- inService(militia, Reason).
 power(congress, appoint(ofiicers(militia))).
 power(congress, prescribe(discipline(training(militia)))).
 
-consent(legislation(state)).
 power(congress, exercise(exlusive(legislation(becomes(seat(government(theUS), district)))))).
 power(congress, exercise(authority(purchased(places)))) :- consent(legislation(state)).
 power(congress, make(laws(necessaryAndProper(power(constitution))))).

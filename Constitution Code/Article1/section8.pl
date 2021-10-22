@@ -1,5 +1,5 @@
 appropriation(money, 1).
-rebelInvations.
+consent(legislation(state)).
 
 power(congress, layAndCollect(X)) :- 
     member(X, [tax, duties, imposts, excises]).
@@ -17,7 +17,7 @@ power(congress, establish(uniform(X))) :-
 
 power(congress, coin(currency)).
 power(congress, regulate(X)) :-
-    member(X, [value(currency). exchangeRates(foreign(currency))]).
+    member(X, [value(currency), exchangeRates(foreign(currency))]).
 
 power(congress, punish(counterfeiting(X))) :-
     member(X, [securities, currency]).
@@ -59,14 +59,11 @@ conditionsOfsupression(X) :- member(X,[insurrections,rebelInvasions]).
 surpress(insurrections) :- insurrections.
 surpress(rebelInvations) :- rebelInvations.
 supress(X) :- conditionsOfsupression(X).
-call(militia) :- 
-    execute(lawsOfUnion);
-    surpress(insurrections);
-    surpress(rebelInvations).
-inService(militia) :- call(militia).
+inService(militia, Reason) :- 
+    member(Reason, [executeLawsOfUnion, insurrections, rebelInvasions]).
 power(congress, provide(X)) :-
     member(X, [organizing(militia), arming(militia), disciplining(militia)]).
-power(congress, governing(militia)) :- inService(militia).
+power(congress, governing(militia)) :- inService(militia, Reason).
 power(congress, appoint(ofiicers(militia))).
 power(congress, prescribe(discipline(training(militia)))).
 
