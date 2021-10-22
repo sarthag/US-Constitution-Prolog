@@ -79,4 +79,8 @@ power(houseOfRepresentatives,choose(otherOfficers)).
 power(houseOfRepresentatives,impeachment).
 
 /* Amendment 26 */ 
+<<<<<<< HEAD
 voterQualified(Y, positionOfOffice) :- (age(Y, Age), Age >= 18).
+=======
+voterQualified(Y, positionOfOffice) :- (age(Y, Age), Age >= 18).
+>>>>>>> b002a96bab554fa6f1628d4c29afcb2c83fba7dc

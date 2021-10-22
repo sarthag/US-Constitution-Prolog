@@ -52,9 +52,6 @@ stateOfUS(georgia).
 monday(7, 1, 2019).
 monday(2, 12, 2019).
 
-appropriation(money, 1).
-rebelInvations.
-militia.
 
 /* Article 1 */
 
@@ -200,6 +197,9 @@ power(senate, concur(amendments(bills(raisingRevenue)))).
 
 
 /* Section 8 */
+rebelInvations.
+appropriation(money, 1).
+insurrections.
 power(congress, layAndCollect(X)) :- 
     member(X, [tax, duties, imposts, excises]).
 
@@ -258,10 +258,11 @@ conditionsOfsupression(X) :- member(X,[insurrections,rebelInvasions]).
 surpress(insurrections) :- insurrections.
 surpress(rebelInvations) :- rebelInvations.
 supress(X) :- conditionsOfsupression(X).
-called(militia) :- 
-    execute(lawsOfUnion);
-    surpress(insurrections);
-    surpress(rebelInvations).
+
+called(militia) :-  
+    executeLawsOfUnion;
+    insurrections;
+    rebelInvations.
 inService(militia) :- called(militia).
 power(congress, provide(X)) :-
     member(X, [organizing(militia), arming(militia), disciplining(militia)]).
