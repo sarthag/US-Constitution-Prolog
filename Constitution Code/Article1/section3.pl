@@ -22,11 +22,17 @@ tenure(class1, YearOfFirstElection, YearOfEnd) :- timeLapsed(YearOfFirstElection
 tenure(class2, YearOfFirstElection,YearOfEnd) :- timeLapsed(YearOfFirstElection,YearOfEnd,4).
 tenure(class3, YearOfFirstElection,YearOfEnd) :- timeLapsed(YearOfFirstElection,YearOfEnd,6).
 
+/* L resigns */
+resign(L).
 /*new senator if old senator resigns */
-senator(NewSenator,OldSenator) :- resign(OldSenator).
-power(executive,makeAppointments(OldSenator,NewSenator))):- resign(OldSenator). 
+newSenator(NewSenator,OldSenator) :- resign(OldSenator).
+power(executive,makeAppointments(newSenator)) :- resign(OldSenator).
 
 /*Conditions to be a senator*/
+
+qualified(X, senate) :- 
+    (age(X, Age), Age >= 30), 
+    (citizen(X, Years), Years >= 9).
 
 exercise(LowerPower,HigherPower).
 concurrence(House,Fraction). 
@@ -48,10 +54,8 @@ choose(F).
 oathOrAffirmation(X).
 
 
-qualified(X, senate) :- 
-    (age(X, Age), Age >= 30), 
-    (citizen(X, Years), Years >= 9).
 
+/*powers of the senate and the president of the senate */
 presidentOfSenate(vicePresident).
 power(presidentOfSenate,vote) :- concurrence(senate, 0.5).
 power(senate,choose(officers)) :- absent(vicePresident) ; exercise(vicePresident,president).
