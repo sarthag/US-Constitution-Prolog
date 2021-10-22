@@ -4,11 +4,12 @@ called(congress, convention(proposingAmendments)):-
 ratified(_).
 yearConditionsMet(Year) :- 
     (Year > 1808; 
-    (not(modify(amendment, articleOne(sectionNine(firstClause))),
+    (not(modify(amendment, articleOne(sectionNine(firstClause)))),
     not(modify(amendment, articleOne(sectionNine(firstClause))))),
-    not(deprive(state, amendment, equalSufferageInSenate)).
+    not(deprive(state, amendment, equalSufferageInSenate))).
 valid(amendment, Year, Fraction1, Fraction2):-
     (ratified(legislature(concurrence(statesOfUS, Fraction1), Fraction1 > 0.75));
      ratified(convention(concurrence(statesOfUS, Fraction2), Fraction2 > 0.75))),
     yearConditionsMet(Year).
+
 
