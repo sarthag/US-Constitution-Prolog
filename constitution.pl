@@ -28,6 +28,7 @@ age(leonard, 40).
 citizen(leonard, 40).
 age(amy, 38).
 citizen(amy, 5).
+citizen(george, 10).
 
 resident(amy, newYork).
 elector(amy, newYork).
@@ -35,6 +36,8 @@ resident(rohan, newYork).
 elector(rohan, newJersy).
 resident(david, newYork).
 elector(david, newYork).
+resident(leonard, washington).
+elector(leonard, washington).
 born(rohan, usa).
 born(leonard, usa).
 born(meera, usa).
