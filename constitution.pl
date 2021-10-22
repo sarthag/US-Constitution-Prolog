@@ -537,7 +537,6 @@ placeOfCrime(DistrictOrState).
 trial(NameOfAccused,CrimeDistrictOrState,TrialDistrictOrState) :- (placeOfCrime(CrimeDistrictOrState),CrimeDistrictOrState == TrialDistrictOrState).
 
 /* Amendment 7 */
-
 preserved(right(trialByJury)) :- 
     (valueInControversy(Money), 
     Money > 20).
@@ -547,7 +546,6 @@ not(reexamination(facts)) :-
     Money > 20). 
 
 /* Amendment 8 */
-
 notAllowed(X) :- member(X, [excessiveBail,excessiveFines,cruelPunishments]).
 
 /*Checks if given action towards criminal is disallowed */
@@ -555,11 +553,9 @@ notAllowed(X) :- member(X, [excessiveBail,excessiveFines,cruelPunishments]).
 /* Amendment 9 */
 
 /* not(deny(enumerated(rights, constitution), person, otherRights)).
-
 not() keyword sus */
 
 /* Amendment 10 */
-
 power(stateOfUS(Y), X) :-
     not(delegated(X, unitedStates, constitution)),
     not(prohibited(X, stateOfUS(Y), constitution)).
@@ -621,9 +617,9 @@ power(congress, enforceArticle(legislation)).
 
 /* compiles without error but cannot query and not keyword is sus */
 
-not(denied(rights(citizen(StateA), basedOn(race)))).
-not(denied(rights(citizen(StateA), basedOn(color)))).
-not(denied(rights(citizen(StateA), basedOn(previousConditionOfServitude)))).
+not(denied(rights(Citizen, basedOn(race)))) :- (citizen(Citizen, Time), Time >= 0)..
+not(denied(rights(Citizen, basedOn(color)))) :- (citizen(Citizen, Time), Time >= 0).
+not(denied(rights(Citizen, basedOn(previousConditionOfServitude)))) :- (citizen(Citizen, Time), Time >= 0).
 
 /* Section 2 */
 
