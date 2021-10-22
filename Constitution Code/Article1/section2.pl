@@ -1,6 +1,5 @@
 
-
-ageName, Age).
+age(Name, Age).
 citizen(Name, Years).
 resident(Name, stateOfUS(X)).
 elector(Name, stateOfUS(Residence), stateOfUS(Standing)) :-
@@ -25,4 +24,4 @@ all other Persons.]
 
 
 /* Ammendment 26 */ 
-voterQualified(Y, positionOfOffice) :- (age(Y, Age), Age >= 18). 
+voterQualified(Y, positionOfOffice) :- (age(Y, Age), Age >= 18).
