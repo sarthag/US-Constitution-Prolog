@@ -697,13 +697,12 @@ not(judicialPowers(construed(extend(suitInEquity(citizen(StateA), citizen(foreig
 not(judicialPowers(construed(extend(suitInLaw(citizen(StateA), subject(foreignState)))))).
 not(judicialPowers(construed(extend(suitInEquity(citizen(StateA), subject(foreignState)))))).
 
+
 /* Amendment 12 */
 
 
 /* Amendment 13 */
-
 /* Section 1 */
-
 exist(slavery, usJurisdiction) :-
     punishment(crime, dulyConvicted(party)).
 
@@ -759,7 +758,6 @@ power(congress, enforceArticle(legislation)).
 
 
 /* Amendment 15 */
-
 /* Section 1 */
 
 /* compiles without error but cannot query and not keyword is sus */
@@ -769,7 +767,6 @@ not(denied(rights(Citizen, basedOn(color)))) :- (citizen(Citizen, Time), Time >=
 not(denied(rights(Citizen, basedOn(previousConditionOfServitude)))) :- (citizen(Citizen, Time), Time >= 0).
 
 /* Section 2 */
-
 power(congress, enforce(article, legislation)).
 
 /* Amendment 16 */
