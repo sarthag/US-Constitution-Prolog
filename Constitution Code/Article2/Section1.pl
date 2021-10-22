@@ -14,7 +14,7 @@ voteByBallot(Elector, Person1, Person2) :-
      resident(Person2, stateOfUS(not(Standing)))).
 
 transmit(signAndCertify(makeList(persons, numVotes)), seat(govenment(theUS), presidentOfSenate)).
-openCertificates(presidentOfSenate), count(numVotes) :-
+openCertificates(presidentOfSenate, count(numVotes)) :-
     presence(senate),
     presence(houseOfRepresentatives).
 
@@ -45,8 +45,18 @@ qualified(X, president) :-
     (citizen(X, Years), Years >= 14),
     (born(X, usa)).
 
+receiveCompensation(duringElectedPeriod(president)).
 
-/* Ammendment 25 */
+notReceive(emolument(president)) :- receiveCompensation(duringElectedPeriod(president)).
+
+/* last paragraph */
+oathOrAffirmation(president, 'I do solemnly
+swear (or affirm) that I will faithfully execute the Offi ce of
+President of the United States, and will to the best of my
+Ability, preserve, protect and defend the Constitution of
+the United States').
+
+/* Amendment 25 */
 
 /* Section 1 */
 becomes(vicePresident, president) :- 
