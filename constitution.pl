@@ -29,6 +29,13 @@ citizen(leonard, 40).
 age(amy, 38).
 citizen(amy, 5).
 
+resident(amy, stateOfUS(newYork)).
+elector(amy, stateOfUS(newYork)).
+resident(rohan, stateOfUS(newYork)).
+elector(rohan, stateOfUS(newJersy)).
+resident(david, stateOfUS(newYork)).
+elector(david, stateOfUS(newYork)).
+
 stateOfUS(newHampshire).
 stateOfUS(massachusetts).
 stateOfUS(connecticut).
@@ -62,7 +69,14 @@ congress(X) :- member(X,[senate,houseOfRepresentatives]).
 
 
 /* Section 2 */
+qualified(X, houseOfRepresentatives) :- 
+    (age(X, Age), Age >= 25), 
+    (citizen(X, Years), Years >= 7),
+    resident(X, stateOfUS(A)), 
+    elector(X, stateOfUS(A)).
 
+/* Ammendment 26 */ 
+voterQualified(Y, positionOfOffice) :- (age(Y, Age), Age >= 18).
 
 /* Section 3 */
 

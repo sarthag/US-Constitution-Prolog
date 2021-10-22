@@ -10,16 +10,17 @@ age(amy, 38).
 citizen(amy, 5).
 
 resident(amy, stateOfUS(newYork)).
-elector(amy, stateOfUS(newYork), stateOfUS(newYork)).
+elector(amy, stateOfUS(newYork)).
 resident(rohan, stateOfUS(newYork)).
-elector(rohan, stateOfUS(newYork), stateOfUS(newJersy)).
+elector(rohan, stateOfUS(newJersy)).
 resident(david, stateOfUS(newYork)).
-elector(david, stateOfUS(newYork), stateOfUS(newYork)).
+elector(david, stateOfUS(newYork)).
 
-qualified(X, houseOfRepresenttives) :- 
+qualified(X, houseOfRepresentatives) :- 
     (age(X, Age), Age >= 25), 
     (citizen(X, Years), Years >= 7),
-    (elector(X, stateOfUS(Residence), stateOfUS(Residence))).
+    resident(X, stateOfUS(A)), 
+    elector(X, stateOfUS(A)).
     
 
 /* 
