@@ -127,7 +127,7 @@ power(congress, establish(uniform(X))) :-
 
 power(congress, coin(currency)).
 power(congress, regulate(X)) :-
-    member(X, [value(currency). exchangeRates(foreign(currency))]).
+    member(X, [value(currency), exchangeRates(foreign(currency))]).
 
 power(congress, punish(counterfeiting(X))) :-
     member(X, [securities, currency]).
@@ -169,11 +169,11 @@ conditionsOfsupression(X) :- member(X,[insurrections,rebelInvasions]).
 surpress(insurrections) :- insurrections.
 surpress(rebelInvations) :- rebelInvations.
 supress(X) :- conditionsOfsupression(X).
-call(militia) :- 
+called(militia) :- 
     execute(lawsOfUnion);
     surpress(insurrections);
     surpress(rebelInvations).
-inService(militia) :- call(militia).
+inService(militia) :- called(militia).
 power(congress, provide(X)) :-
     member(X, [organizing(militia), arming(militia), disciplining(militia)]).
 power(congress, governing(militia)) :- inService(militia).
@@ -192,13 +192,13 @@ power(congress, make(laws(necessaryAndProper(power(constitution))))).
 /* Section 10 */
 tenderList([gold,silver]).
 paymentOfDebts(Mode) :- not(member(Mode,tenderList)).
-billsNotAllowed([billOfAttainder,exPostFactoLaw,impairingObligationOfContracts,grant(titleOfNobility)]).
 
 /*passBill is for passing disallowed bills*/
-cantPassBill(Bill) :- member(Bill,billsNotAllowed)
+cantPassBill(Bill) :- 
+    member(Bill, [billOfAttainder, exPostFactoLaw, impairingObligationOfContracts, grant(titleOfNobility)]).
 notAllowedForStates([entering([Treaty,Alliance,Confederation]),
 grant(lettersOfMarqueeAndReprisal),
-coinMoney,
+coin(money),
 emit(billsOfCredit),
 tender(paymentOfDebts(Mode)),
 cantPassBill(Bill)]).
@@ -207,14 +207,15 @@ cantPassBill(Bill)]).
 dissallowed(Action) :- member(Action,memberOfStates).
 
 /* List of items that require consent of congress*/
-needConsentOfCongress ([
+needConsentOfCongress(X) :-
+    member(X, [
     lay(impostsOrDuties(importsOrExports)),
     lay(dutyOfTonnage),
     keep(troops),
     keep(shipsOfWarduringPeace),
-    enter(agreementOrCompact([anotherState,foriegnPower])),
-    engage(war(Reason)).
-]).
+    enter(agreementOrCompact(with(anotherState))),
+    enter(agreementOrCompact(with(foriegnPower))),
+    engage(war(Reason))]). 
 /* noConsentNeeded is a list of conditions where there is no necessity for Congress consent for war*/
 noConsentNeeded([invaded,imminentDanger]).
 /* need consent unless invasion or imminent danger*/
@@ -256,7 +257,7 @@ power(principalOfficer(Department), advice(president)).
 
 /* Section 3 */
 information(president, congress, stateOfUnion).
-recommend(president, congress, measures(A,B) :- measures(necessary,expedient).
+recommend(president, congress, measures(A,B)) :- measures(necessary,expedient).
 convene(president,houseOfRepresentatives,senate) :- occasion(extraordinary).
 convene(president,X) :- 
   occasion(extraordinary),
@@ -349,7 +350,7 @@ faith(StateA, StateB) :-
      charged(citizen, felony, StateA);
      charged(citizen, otherCrime, StateA)),
     found(citizen, StateA),
-    demand(executiveAuthority(StateA), 
+    demand(executiveAuthority(StateA)), 
     delivered(citizen, StateA),
     stateOfUS(StateA), 
     stateOfUS(StateB).
@@ -487,7 +488,7 @@ convene(senators, representatives, Time, Place) :- congressElects(Day1, Day2, Ti
 /* Amendments */
 
 /* Amendment 1 */
-unRevokableRights ([freedom(speech),freedom(press),right(peacably(assemble)),petition(redress(grievances))]).
+unRevokableRights([freedom(speech),freedom(press),right(peacably(assemble)),petition(redress(grievances))]).
 newLaw(Right) :- not(member(Right,unRevokableRights)).
 
 /* Above statement checks whether the new law  
@@ -563,7 +564,7 @@ power(stateOfUS(Y), X) :-
     not(delegated(X, unitedStates, constitution)),
     not(prohibited(X, stateOfUS(Y), constitution)).
     
-*/ will throw error for power(X,Y), will not for power(congress, Y) */
+/* will throw error for power(X,Y), will not for power(congress, Y) */
 
 /* Amendment 11 */
 
@@ -673,7 +674,7 @@ power(congress, enforceArticle(legislation)).
 
 /* Amendment 21 */
 
-*/ Section 1 repealed amendment 18 */
+/*Section 1 repealed amendment 18 */
 
 /* Section 2 */
 
